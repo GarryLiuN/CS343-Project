@@ -4,7 +4,7 @@ export PATH=`git rev-parse --git-dir`/../tools/:$PATH
 
 echo "Start pre-commit clang-format"
 
-git clang-format --extensions cpp,hpp --style file -v
+git clang-format --extensions c,h,cc,cpp,hpp --style file -v
 # Possible predefined styles:
 # LLVM
 # Google
