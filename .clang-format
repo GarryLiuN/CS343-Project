@@ -1,0 +1,19 @@
+BasedOnStyle:  Chromium
+TabWidth:        4
+IndentWidth:     4
+
+AllowShortIfStatementsOnASingleLine: true 
+SpacesBeforeTrailingComments: 2
+BreakBeforeBinaryOperators: true
+SpacesInParentheses: true
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+ColumnLimit: 80
+AllowShortFunctionsOnASingleLine: false
+AlwaysBreakAfterReturnType: TopLevelDefinitions
+AllowShortFunctionsOnASingleLine: Empty
+AlignAfterOpenBracket: Align
+AllowAllParametersOfDeclarationOnNextLine: false
+BinPackParameters: false
+AlignTrailingComments: false
