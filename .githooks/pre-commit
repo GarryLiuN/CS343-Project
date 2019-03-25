@@ -1,37 +1,26 @@
 #!/bin/bash
 
-export PATH=`git rev-parse --git-dir`/../tools/:$PATH
-
-echo "Start pre-commit clang-format"
-
-git clang-format --extensions c,h,cc,cpp,hpp --style file -v
-# Possible predefined styles:
-# LLVM
-# Google
-# Chromium
-# Mozilla
-# WebKit
-
-# Change the code with:
-# git clang-format --extensions cpp,hpp -style=llvm -v
-
-
-rc=$?
-if [[ $rc == 33 ]]
-then
- echo "Nothing needs to be reformatted!"
- exit 0
+STYLE=$(git config --get hooks.clangformat.style)
+if [ -n "${STYLE}" ] ; then
+  STYLEARG="-style=${STYLE}"
+else
+  STYLEARG=""
 fi
 
-echo -e "Would you like to continue to commit (y/n): \c"
+format_file() {
+  file="${1}"
+  clang-format -extensions c,h,cpp,hpp,cc -i ${STYLEARG} ${1}
+  git add ${1}
+}
 
-# Make sure under any mode, we can read user input.
-exec < /dev/tty
-read cont
-
-if [ "$cont" == "y" ]
-then
- exit 0
-fi
-
-exit 1
+case "${1}" in
+  --about )
+    ;;
+  * )
+    echo "Runs clang-format on source files:"
+    for file in `git diff-index --cached --name-only HEAD` ; do
+      echo -e "  \033[32m${file}\033[0m"
+      format_file "${file}"
+    done
+    ;;
+esac
