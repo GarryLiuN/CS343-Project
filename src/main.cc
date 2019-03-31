@@ -21,15 +21,21 @@ main( int argc, char* argv[] ) {
             default:
                 cerr << "Too many arguments." << endl;
                 throw 1;
-        }
+        }  // switch
     } catch ( ... ) {
         cerr << "Usage: " << argv[0] << " [ config-file [ Seed ] ]" << endl;
         exit( EXIT_FAILURE );
-    }
+    }  // try{} catch{}
 
     ConfigParms configParms;
-
     processConfigFile( config.c_str(), configParms );
+    cout << configParms.groupoffDelay << " " << configParms.maxPurchases << " "
+         << configParms.maxShippedPerFlavour << " "
+         << configParms.maxStockPerFlavour << " " << configParms.numCouriers
+         << " " << configParms.numStudents << " "
+         << configParms.numVendingMachines << " " << configParms.parentalDelay
+         << " " << configParms.sodaCost << " "
+         << configParms.timeBetweenShipments << " ";
 
     // TODO: initialize tasks
     // TODO: end tasks
