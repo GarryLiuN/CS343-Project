@@ -1,0 +1,7 @@
+
+#define _Cormonitor class
+#define _Monitor class
+#define _Task class
+#define _Event enum
+#define uProcessor int
+#define TASK
