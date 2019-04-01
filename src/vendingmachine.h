@@ -7,11 +7,14 @@
 
 _Task VendingMachine {
    private:
-    Printer&     prt;
-    NameServer&  nameServer;
+    // references
+    Printer&    prt;
+    NameServer& nameServer;
+    // attributes
     unsigned int id;
     unsigned int sodaCost;
-    void         main();
+
+    void main();
 
    public:
     // TODO: Define flavours

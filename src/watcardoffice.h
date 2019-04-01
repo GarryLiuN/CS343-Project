@@ -7,10 +7,12 @@
 
 _Task WATCardOffice {
    private:
-    Printer&     prt;
-    Bank&        bank;
+    // references
+    Printer& prt;
+    Bank&    bank;
+    // attributes
     unsigned int numCouriers;
-
+    // classes and structures
     struct Job {  // marshalled arguments and return future
         // TODO Define args, give it a proper type
         int               args;  // call arguments (YOU DEFINE "Args")

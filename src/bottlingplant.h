@@ -5,15 +5,18 @@
 #include "printer.h"
 
 _Task BottlingPlant {
-    void main();
-    // reference
-    Printer & prt;
-    NameServer & nameServer;
-    // attribute
+   private:
+    // references
+    Printer&    prt;
+    NameServer& nameServer;
+    // fields
     unsigned int numVendingMachines;
     unsigned int maxShippedPerFlavour;
     unsigned int maxStockPerFlavour;
     unsigned int timeBetweenShipments;
+
+    void main();
+
    public:
     _Event Shutdown{};  // shutdown plant
     BottlingPlant(

@@ -7,12 +7,15 @@
 
 _Task Truck {
    private:
+    // references
     Printer&       prt;
     NameServer&    nameServer;
     BottlingPlant& plant;
-    unsigned int   numVendingMachines;
-    unsigned int   maxStockPerFlavour;
-    void           main();
+    // attributes
+    unsigned int numVendingMachines;
+    unsigned int maxStockPerFlavour;
+
+    void main();
 
    public:
     Truck( Printer & prt, NameServer & nameServer, BottlingPlant & plant,

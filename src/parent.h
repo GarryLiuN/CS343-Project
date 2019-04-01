@@ -6,11 +6,14 @@
 
 _Task Parent {
    private:
-    void         main();
-    Printer&     prt;
-    Bank&        bank;
+    // references
+    Printer& prt;
+    Bank&    bank;
+    // attributes
     unsigned int numStudents;
     unsigned int parentalDelay;
+
+    void main();
 
    public:
     Parent( Printer & prt, Bank & bank, unsigned int numStudents,

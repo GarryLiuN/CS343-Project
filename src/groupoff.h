@@ -6,7 +6,9 @@
 
 _Task Groupoff {
    private:
-    Printer&     prt;
+    // references
+    Printer& prt;
+    // fields
     unsigned int numStudents;
     unsigned int sodaCost;
     unsigned int groupoffDelay;
