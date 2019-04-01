@@ -1,4 +1,4 @@
-#ifndef __PRINER_H__
+#ifndef __PRINTER_H__
 #define __PRINTER_H__
 
 _Monitor Printer {

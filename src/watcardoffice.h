@@ -1,13 +1,21 @@
 #ifndef __WATCARDOFFICE_H__
 #define __WATCARDOFFICE_H__
 
+#include "bank.h"
+#include "printer.h"
+#include "watcard.h"
+
 _Task WATCardOffice {
     struct Job {  // marshalled arguments and return future
-        Args              args;  // call arguments (YOU DEFINE "Args")
+        // TODO Define args, give it a proper type
+        int               args;  // call arguments (YOU DEFINE "Args")
         WATCard::FWATCard result;  // return future
-        Job( Args args ) : args( args ) {}
+        Job( int args ) : args( args ) {}
     };
-    _Task Courier{...};  // communicates with bank
+
+    _Task Courier{
+        // TODO
+    };  // communicates with bank
 
     void main();
 

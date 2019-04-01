@@ -5,3 +5,4 @@
 #define _Event enum
 #define uProcessor int
 #define TASK
+#define _Nomutex

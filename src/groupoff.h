@@ -1,6 +1,9 @@
 #ifndef __GROUPOFF_H__
 #define __GROUPOFF_H__
 
+#include "printer.h"
+#include "watcard.h"
+
 _Task Groupoff {
     void main();
 

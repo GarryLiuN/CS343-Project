@@ -1,1 +1,16 @@
 #include "groupoff.h"
+
+#include "watcard.h"
+
+Groupoff::Groupoff( Printer&     prt,
+                    unsigned int numStudents,
+                    unsigned int sodaCost,
+                    unsigned int groupoffDelay ) {}
+
+WATCard::FWATCard
+Groupoff::giftCard() {
+    return WATCard::FWATCard();
+}
+
+void
+Groupoff::main() {}

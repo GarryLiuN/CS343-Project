@@ -3,7 +3,10 @@
 #include <string>  // access: string, stoi
 using namespace std;
 
+#include "MPRNG.h"
 #include "config.h"
+
+MPRNG mprng;
 
 int
 main( int argc, char* argv[] ) {
@@ -27,15 +30,10 @@ main( int argc, char* argv[] ) {
         exit( EXIT_FAILURE );
     }  // try{} catch{}
 
+    mprng.set_seed( seed );
+
     ConfigParms configParms;
     processConfigFile( config.c_str(), configParms );
-    cout << configParms.groupoffDelay << " " << configParms.maxPurchases << " "
-         << configParms.maxShippedPerFlavour << " "
-         << configParms.maxStockPerFlavour << " " << configParms.numCouriers
-         << " " << configParms.numStudents << " "
-         << configParms.numVendingMachines << " " << configParms.parentalDelay
-         << " " << configParms.sodaCost << " "
-         << configParms.timeBetweenShipments << " ";
 
     // TODO: initialize tasks
     // TODO: end tasks

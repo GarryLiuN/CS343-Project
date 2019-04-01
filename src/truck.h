@@ -1,6 +1,10 @@
 #ifndef __TRUCK_H__
 #define __TRUCK_H__
 
+#include "bottlingplant.h"
+#include "nameserver.h"
+#include "printer.h"
+
 _Task Truck {
     void main();
 
