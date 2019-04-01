@@ -9,7 +9,7 @@ fi
 
 format_file() {
   file="${1}"
-  clang-format -i ${STYLEARG} *.cpp *.cc *.h *.hpp ${1}
+  clang-format -i ${STYLEARG} ${1}
   git add ${1}
 }
 
@@ -19,7 +19,7 @@ case "${1}" in
   * )
     echo "Runs clang-format on source files:"
     for file in `git diff-index --cached --name-only --diff-filter=AM HEAD` ; do
-      if [[ $file == *".cc" ]] || [[ $file == *".h" ]]; then
+      if [[ "$file" == *".cc" ]] || [[ "$file" == *".h" ]]; then
         echo -e "  \033[32m${file}\033[0m"
         format_file "${file}"
       fi
