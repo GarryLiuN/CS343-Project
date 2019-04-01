@@ -3,7 +3,10 @@
 
 Printer::Printer( unsigned int numStudents,
                   unsigned int numVendingMachines,
-                  unsigned int numCouriers ) {}
+                  unsigned int numCouriers )
+    : numStudents( numStudents ),
+      numVendingMachines( numVendingMachines ),
+      numCouriers( numCouriers ) {}
 
 void
 Printer::print( Kind kind, char state ) {}

@@ -2,6 +2,11 @@
 #define __PRINTER_H__
 
 _Monitor Printer {
+   private:
+    unsigned int numStudents;
+    unsigned int numVendingMachines;
+    unsigned int numCouriers;
+
    public:
     enum Kind {
         Parent,

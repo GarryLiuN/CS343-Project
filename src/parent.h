@@ -5,7 +5,12 @@
 #include "printer.h"
 
 _Task Parent {
-    void main();
+   private:
+    void         main();
+    Printer&     prt;
+    Bank&        bank;
+    unsigned int numStudents;
+    unsigned int parentalDelay;
 
    public:
     Parent( Printer & prt, Bank & bank, unsigned int numStudents,

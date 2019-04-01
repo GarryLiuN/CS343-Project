@@ -10,7 +10,13 @@ Student::Student( Printer&       prt,
                   WATCardOffice& cardOffice,
                   Groupoff&      groupoff,
                   unsigned int   id,
-                  unsigned int   maxPurchases ) {}
+                  unsigned int   maxPurchases )
+    : prt( prt ),
+      nameServer( nameServer ),
+      cardOffice( cardOffice ),
+      groupoff( groupoff ),
+      id( id ),
+      maxPurchases( maxPurchases ) {}
 
 void
 Student::main() {}
