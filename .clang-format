@@ -16,4 +16,5 @@ AllowShortFunctionsOnASingleLine: Empty
 AlignAfterOpenBracket: Align
 AllowAllParametersOfDeclarationOnNextLine: false
 BinPackParameters: false
+BinPackArguments: false
 AlignTrailingComments: false
