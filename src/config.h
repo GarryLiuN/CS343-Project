@@ -9,10 +9,10 @@ struct ConfigParms {
                                       // flavour stocked
     unsigned int maxShippedPerFlavour;  // number of bottles of each flavour in
                                         // a shipment
-    unsigned int
-        timeBetweenShipments;  // length of time between shipment pickup
-    unsigned int
-                 groupoffDelay;  // length of time between initializing gift cards
+    unsigned int timeBetweenShipments;  // length of time between
+                                        // shipment pickup
+    unsigned int groupoffDelay;  // length of time between initializing
+                                 // gift cards
     unsigned int parentalDelay;  // length of time between cash deposits
     unsigned int numCouriers;  // number of couriers in the pool
 };  // ConfigParms
