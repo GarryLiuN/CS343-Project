@@ -6,6 +6,11 @@
 #include "watcard.h"
 
 _Task WATCardOffice {
+   private:
+    Printer&     prt;
+    Bank&        bank;
+    unsigned int numCouriers;
+
     struct Job {  // marshalled arguments and return future
         // TODO Define args, give it a proper type
         int               args;  // call arguments (YOU DEFINE "Args")

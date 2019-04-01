@@ -6,7 +6,8 @@
 
 WATCardOffice::WATCardOffice( Printer&     prt,
                               Bank&        bank,
-                              unsigned int numCouriers ) {}
+                              unsigned int numCouriers )
+    : prt( prt ), bank( bank ), numCouriers( numCouriers ) {}
 
 WATCard::FWATCard
 WATCardOffice::create( unsigned int sid, unsigned int amount ) {

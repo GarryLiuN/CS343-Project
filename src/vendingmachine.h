@@ -6,7 +6,12 @@
 #include "watcard.h"
 
 _Task VendingMachine {
-    void main();
+   private:
+    Printer&     prt;
+    NameServer&  nameServer;
+    unsigned int id;
+    unsigned int sodaCost;
+    void         main();
 
    public:
     // TODO: Define flavours

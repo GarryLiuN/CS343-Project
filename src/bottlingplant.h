@@ -6,7 +6,14 @@
 
 _Task BottlingPlant {
     void main();
-
+    // reference
+    Printer & prt;
+    NameServer & nameServer;
+    // attribute
+    unsigned int numVendingMachines;
+    unsigned int maxShippedPerFlavour;
+    unsigned int maxStockPerFlavour;
+    unsigned int timeBetweenShipments;
    public:
     _Event Shutdown{};  // shutdown plant
     BottlingPlant(

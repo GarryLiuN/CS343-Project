@@ -5,6 +5,12 @@
 #include "watcard.h"
 
 _Task Groupoff {
+   private:
+    Printer&     prt;
+    unsigned int numStudents;
+    unsigned int sodaCost;
+    unsigned int groupoffDelay;
+
     void main();
 
    public:
