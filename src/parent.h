@@ -1,6 +1,7 @@
 #ifndef __PARENT_H__
 #define __PARENT_H__
 
+#include "MPRNG.h"
 #include "bank.h"
 #include "printer.h"
 
@@ -16,6 +17,7 @@ _Task Parent {
     void main();
 
    public:
+    ~Parent();
     Parent( Printer & prt,
             Bank & bank,
             unsigned int numStudents,
