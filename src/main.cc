@@ -102,6 +102,7 @@ main( int argc, char* argv[] ) {
     }
 
     // ------------------Wait and Delete Instances------------------
+
     // wait and delete Students
     for ( unsigned int i = 0; i < configParms.numStudents; ++i ) {
         delete students[i];
