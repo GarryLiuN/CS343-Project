@@ -202,7 +202,7 @@ Printer::get_info( Kind kind, unsigned int id ) {
         case WATCardOffice:
             return &watoff;
         case NameServer:
-            return &watoff;
+            return &names;
         case Truck:
             return &truck;
         case BottlingPlant:
