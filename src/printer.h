@@ -27,6 +27,12 @@ _Monitor Printer {
     std::vector<Info> machines;
     std::vector<Info> couriers;
 
+    /**
+     * @brief Flush stored dirty Info buffer to stdout. and set all
+     *        Info.dirty = false
+     */
+    void flush();
+
    public:
     enum Kind {
         Parent,
@@ -40,13 +46,18 @@ _Monitor Printer {
         Courier
     };
     /**
-     * @brief Construct for Printer. Will initialize vector<Info>
+     * @brief Constructor for Printer. Will initialize vector<Info>
      *        buffers for students, vending machines and couriers.
      *        It will also print out output header.
      */
     Printer( unsigned int numStudents,
              unsigned int numVendingMachines,
              unsigned int numCouriers );
+    /**
+     * @brief Destructor for Printer. Will flush Info buffers before
+     *        deletion.
+     */
+    ~Printer();
     void print( Kind kind, char state );
     void print( Kind kind, char state, int value1 );
     void print( Kind kind, char state, int value1, int value2 );
@@ -54,6 +65,10 @@ _Monitor Printer {
     void print( Kind kind, unsigned int lid, char state, int value1 );
     void print(
         Kind kind, unsigned int lid, char state, int value1, int value2 );
+
+   private:
+    // additional helper method. since it depends on Kind
+    Info* get_info( Kind kind, unsigned int id = 0 );
 };
 
 #endif
