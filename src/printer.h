@@ -8,8 +8,8 @@ _Monitor Printer {
     struct Info {
         bool dirty = false;
         char state;
-        int  val1;
-        int  val2;
+        int  val1 = -1;
+        int  val2 = -1;
     };
 
     unsigned int numStudents;
@@ -32,6 +32,7 @@ _Monitor Printer {
      *        Info.dirty = false
      */
     void flush();
+    void print_info( Info & info );
 
    public:
     enum Kind {
