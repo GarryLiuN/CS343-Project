@@ -3,6 +3,7 @@
 
 _Monitor Bank {
    private:
+    unsigned int  numStudents;
     unsigned int* studentAccounts;
 
    public:

@@ -3,7 +3,7 @@
 // constructor for Bank
 // student accounts need to be dynamically allocated since the student number is
 // unknown at compile time
-Bank::Bank( unsigned int numStudents ) {
+Bank::Bank( unsigned int numStudents ) : numStudents( numStudents ) {
     // array initialization
     studentAccounts = new unsigned int[numStudents];
     for ( unsigned int i = 0; i < numStudents; i++ ) {
