@@ -14,10 +14,24 @@ BottlingPlant::BottlingPlant( Printer&     prt,
       numVendingMachines( numVendingMachines ),
       maxShippedPerFlavour( maxShippedPerFlavour ),
       maxStockPerFlavour( maxStockPerFlavour ),
-      timeBetweenShipments( timeBetweenShipments ) {}
+      timeBetweenShipments( timeBetweenShipments ) {
+    currentStock = 0;
+}
 
 void
 BottlingPlant::getShipment( unsigned int cargo[] ) {}
 
 void
-BottlingPlant::main() {}
+BottlingPlant::main() {
+    prt.print( Printer::Kind::BottlingPlant,
+               'S' );  // print start message for bottling plant
+    Truck truck( prt,
+                 nameServer,
+                 *this,
+                 numVendingMachines,
+                 maxStockPerFlavour );  // create truck
+
+    // production run
+    for ( ;; ) {
+    }
+}
