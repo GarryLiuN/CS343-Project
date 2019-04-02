@@ -17,6 +17,7 @@ Parent::~Parent() {
     prt.print( Printer::Kind::Parent, 'F' );  // print terminate message
 }
 void
+
 Parent::main() {
     prt.print( Printer::Kind::Parent, 'S' );  // print start message for parent
     for ( ;; ) {
