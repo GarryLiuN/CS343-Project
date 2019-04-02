@@ -18,11 +18,18 @@ _Task VendingMachine {
 
    public:
     // TODO: Define flavours
-    enum Flavours {};  // flavours of soda (YOU DEFINE)
+    enum Flavours {
+        Blues_Black_Cherry,
+        Classic_Cream_Soda,
+        Rock_Root_Beer,
+        Jazz_Lime
+    };  // flavours of soda (YOU DEFINE)
     _Event Free{};  // free, advertisement
     _Event Funds{};  // insufficient funds
     _Event Stock{};  // out of stock for particular flavour
-    VendingMachine( Printer & prt, NameServer & nameServer, unsigned int id,
+    VendingMachine( Printer & prt,
+                    NameServer & nameServer,
+                    unsigned int id,
                     unsigned int sodaCost );
     void                  buy( Flavours flavour, WATCard & card );
     unsigned int*         inventory();

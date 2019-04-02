@@ -7,16 +7,17 @@
 _Task BottlingPlant {
    private:
     // references
-    Printer&    prt;
-    NameServer& nameServer;
+    static const unsigned int NUMOFFLAVORS = 4;
+    Printer&                  prt;
+    NameServer&               nameServer;
     // fields
     unsigned int numVendingMachines;
     unsigned int maxShippedPerFlavour;
     unsigned int maxStockPerFlavour;
     unsigned int timeBetweenShipments;
-    unsigned int currentStock;
-
-    void main();
+    unsigned int currentStock[NUMOFFLAVORS];  // array of stock for each flavor
+    bool         shutDownFlag;
+    void         main();
 
    public:
     _Event Shutdown{};  // shutdown plant
