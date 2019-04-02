@@ -5,7 +5,7 @@
 
 class WATCard {
    private:
-    unsigned int amount;
+    unsigned int balance;
     WATCard( const WATCard& ) = delete;  // prevent copying
     WATCard& operator=( const WATCard& ) = delete;
 
