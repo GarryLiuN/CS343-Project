@@ -29,6 +29,12 @@ main( int argc, char* argv[] ) {
         switch ( argc ) {
             case 3:
                 seed = stoi( argv[2] );
+                if ( seed <= 0 ) {
+                    cerr << "Invalid argument: seed must be a "
+                            "positive number."
+                         << endl;
+                    throw 1;
+                }
             case 2:
                 config = argv[1];
             case 1:
