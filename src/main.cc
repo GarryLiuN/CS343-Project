@@ -55,32 +55,35 @@ main( int argc, char* argv[] ) {
                      configParms.numCouriers );
     // initialize Bank
     Bank bank( configParms.numStudents );
-    // initialize NameServer
-    NameServer nameserver(
-        printer, configParms.numCouriers, configParms.numVendingMachines );
+    // initialize Parent
+    Parent parent(
+        printer, bank, configParms.numStudents, configParms.parentalDelay );
+    // initialize WatCardOffice
+    WATCardOffice watcardoffice( printer, bank, configParms.numCouriers );
     // initialize Groupoff
     Groupoff groupoff( printer,
                        configParms.numStudents,
                        configParms.sodaCost,
                        configParms.groupoffDelay );
-    // initialize WatCardOffice
-    WATCardOffice watcardoffice( printer, bank, configParms.numCouriers );
-    // initialize Parent
-    Parent parent(
-        printer, bank, configParms.numStudents, configParms.parentalDelay );
+    // initialize NameServer
+    NameServer nameserver(
+        printer, configParms.numCouriers, configParms.numVendingMachines );
+    // initialize VendingMachines
+    VendingMachine* vendingmachines[configParms.numVendingMachines];
+    for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
+        vendingmachines[i] = new VendingMachine(
+            printer, nameserver, i, configParms.sodaCost );
+    }
     // initialize BottlingPlant
-    BottlingPlant bottlingPlant( printer,
-                                 nameserver,
-                                 configParms.numVendingMachines,
-                                 configParms.maxShippedPerFlavour,
-                                 configParms.maxStockPerFlavour,
-                                 configParms.timeBetweenShipments );
-    // initialize Truck
-    Truck truck( printer,
-                 nameserver,
-                 bottlingPlant,
-                 configParms.numVendingMachines,
-                 configParms.maxStockPerFlavour );
+    /** Since BottlingPlant needs to be deleted before VendingMachines,
+     *  it needs to be allocated on heap for manual deletion     */
+    BottlingPlant* bottlingPlant
+        = new BottlingPlant( printer,
+                             nameserver,
+                             configParms.numVendingMachines,
+                             configParms.maxShippedPerFlavour,
+                             configParms.maxStockPerFlavour,
+                             configParms.timeBetweenShipments );
     // initialize Students
     Student* students[configParms.numStudents];
     for ( unsigned int i = 0; i < configParms.numStudents; ++i ) {
@@ -91,20 +94,15 @@ main( int argc, char* argv[] ) {
                                    i,
                                    configParms.maxPurchases );
     }
-    // initialize VendingMachines
-    VendingMachine* vendingmachines[configParms.numVendingMachines];
-    for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
-        vendingmachines[i] = new VendingMachine(
-            printer, nameserver, i, configParms.sodaCost );
-    }
 
     // ------------------Wait and Delete Instances------------------
-
-    // wait for VendingMachines
+    // wait and delete BottlingPlant
+    delete bottlingPlant;
+    // wait and delete VendingMachines
     for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
         delete vendingmachines[i];
     }
-    // wait for Students
+    // wait and delete Students
     for ( unsigned int i = 0; i < configParms.numStudents; ++i ) {
         delete students[i];
     }
