@@ -1,7 +1,6 @@
 #ifndef __PARENT_H__
 #define __PARENT_H__
 
-#include "MPRNG.h"
 #include "bank.h"
 #include "printer.h"
 

@@ -1,7 +1,10 @@
 #include "parent.h"
 
+#include "MPRNG.h"
+
 #include "bank.h"
 #include "printer.h"
+
 extern MPRNG mprng;
 
 Parent::Parent( Printer&     prt,
