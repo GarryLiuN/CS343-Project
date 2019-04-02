@@ -102,15 +102,16 @@ main( int argc, char* argv[] ) {
     }
 
     // ------------------Wait and Delete Instances------------------
+
+    // wait and delete Students
+    for ( unsigned int i = 0; i < configParms.numStudents; ++i ) {
+        delete students[i];
+    }
     // wait and delete BottlingPlant
     delete bottlingPlant;
     // wait and delete VendingMachines
     for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
         delete vendingmachines[i];
-    }
-    // wait and delete Students
-    for ( unsigned int i = 0; i < configParms.numStudents; ++i ) {
-        delete students[i];
     }
     // the rest will be deleted when main returns
 
