@@ -48,7 +48,8 @@ Truck::main() {
         prt.print( Printer::Truck, 'P', totalCargo );  // print shipment info
 
         // 2. Starting restock vending machine
-        for ( auto count = 0U; count < numVendingMachines; count++ ) {
+        for ( auto count = 0U; vendingMachines && count < numVendingMachines;
+              count++ ) {
             // calculate the next machine index
             currentMachineIndex
                 = ( currentMachineIndex + 1 ) % numVendingMachines;
