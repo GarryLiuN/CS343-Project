@@ -1,6 +1,8 @@
 #ifndef __WATCARDOFFICE_H__
 #define __WATCARDOFFICE_H__
 
+#include <queue>
+
 #include "bank.h"
 #include "printer.h"
 #include "watcard.h"
@@ -14,16 +16,36 @@ _Task WATCardOffice {
     unsigned int numCouriers;
     // classes and structures
     struct Job {  // marshalled arguments and return future
-        // TODO Define args, give it a proper type
-        int               args;  // call arguments (YOU DEFINE "Args")
+        unsigned int      id;  // student id
+        unsigned int      amount;  // amount of fund
+        WATCard*          watcard;  // optional WATCard to transfer fund
         WATCard::FWATCard result;  // return future
-        Job( int args ) : args( args ) {}
+
+        Job( unsigned int id, unsigned int amount, WATCard* watcard = nullptr )
+            : id( id ), amount( amount ), watcard( watcard ) {}
     };
 
-    _Task Courier{
-        // TODO
+    _Task Courier {
+       private:
+        Bank&          bank;
+        WATCardOffice& office;
+        Printer&       prt;
+        unsigned int   id;
+
+        void main();
+
+       public:
+        Courier( Bank & bank,
+                 WATCardOffice & office,
+                 Printer & prt,
+                 unsigned int id );
     };  // communicates with bank
 
+    // private fields
+    Job*             newJob = nullptr;
+    std::queue<Job*> jobs;
+    bool             isDestructed = false;
+    // Task main
     void main();
 
    public:
