@@ -26,7 +26,7 @@ BottlingPlant::BottlingPlant( Printer&     prt,
 // getShipment will be called by truck and deliver current stock to the cargo
 void
 BottlingPlant::getShipment( unsigned int cargo[] ) {
-    if ( shutDownFlag ) {
+    if ( isDestructed ) {
         _Throw Shutdown();
     }
     for ( auto i = 0U; i < NUMOFFLAVORS; i++ ) {
@@ -59,7 +59,7 @@ BottlingPlant::main() {
                    totalProduction );  // print soda generation message
 
         _Accept( ~BottlingPlant ) {
-            shutDownFlag = true;  // update shut down flag and break loop
+            isDestructed = true;  // update shut down flag and break loop
             break;
         }
         or _Accept( getShipment ) {

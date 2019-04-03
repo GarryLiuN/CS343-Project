@@ -17,7 +17,7 @@ _Task BottlingPlant {
     unsigned int maxStockPerFlavour;
     unsigned int timeBetweenShipments;
     unsigned int currentStock[NUMOFFLAVORS] = {0};  // stock for each flavor
-    bool         shutDownFlag               = false;
+    bool         isDestructed               = false;
 
     void main();
 
