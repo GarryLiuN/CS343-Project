@@ -21,9 +21,7 @@ BottlingPlant::BottlingPlant( Printer&     prt,
       numVendingMachines( numVendingMachines ),
       maxShippedPerFlavour( maxShippedPerFlavour ),
       maxStockPerFlavour( maxStockPerFlavour ),
-      timeBetweenShipments( timeBetweenShipments ) {
-    shutDownFlag = false;
-}
+      timeBetweenShipments( timeBetweenShipments ) {}
 
 // getShipment will be called by truck and deliver current stock to the cargo
 void

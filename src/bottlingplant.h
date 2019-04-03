@@ -4,6 +4,8 @@
 #include "nameserver.h"
 #include "printer.h"
 
+extern const unsigned int NUMOFFLAVORS;
+
 _Task BottlingPlant {
    private:
     // references
@@ -16,7 +18,7 @@ _Task BottlingPlant {
     unsigned int maxStockPerFlavour;
     unsigned int timeBetweenShipments;
     unsigned int currentStock[NUMOFFLAVORS];  // array of stock for each flavor
-    bool         shutDownFlag;
+    bool         shutDownFlag = false;
     void         main();
 
    public:

@@ -6,8 +6,8 @@ using namespace std;
 #include "MPRNG.h"
 #include "config.h"
 
-MPRNG mprng;
-
+MPRNG              mprng;
+const unsigned int NUMOFFLAVORS = 4;
 int
 main( int argc, char* argv[] ) {
     int    seed   = getpid();

@@ -17,7 +17,6 @@ _Task VendingMachine {
     void main();
 
    public:
-    // TODO: Define flavours
     enum Flavours {
         Blues_Black_Cherry,
         Classic_Cream_Soda,
