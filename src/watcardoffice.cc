@@ -1,3 +1,5 @@
+#include <iostream>
+using namespace std;
 #include "watcardoffice.h"
 
 #include "bank.h"
@@ -17,7 +19,8 @@ WATCardOffice::WATCardOffice( Printer&     prt,
 
 WATCard::FWATCard
 WATCardOffice::create( unsigned int sid, unsigned int amount ) {
-    newJob = new Job( bank, sid, amount );
+    newJob = new Job( sid, amount );
+    prt.print( Printer::WATCardOffice, 'C', sid, amount );
     return newJob->result;
 }  // WATCardOffice::create()
 
@@ -25,7 +28,8 @@ WATCard::FWATCard
 WATCardOffice::transfer( unsigned int sid,
                          unsigned int amount,
                          WATCard*     card ) {
-    newJob = new Job( bank, sid, amount, card );
+    newJob = new Job( sid, amount, card );
+    prt.print( Printer::WATCardOffice, 'T', sid, amount );
     return newJob->result;
 }  // WATCardOffice::transfer()
 
@@ -35,15 +39,7 @@ WATCardOffice::requestWork() {
         return nullptr;
     }
 
-    if ( jobs.empty() ) {
-        cond_jobs.wait();  // when there's no job, block here
-        // could be waken up due to system shutdown
-        if ( isDestructed ) {
-            return nullptr;
-        }
-    }
-    WATCardOffice::Job* job = jobs.front();
-    jobs.pop();
+    Job* job = jobs.front();
     return job;
 }  // WATCardOffice::requestWork()
 
@@ -61,20 +57,19 @@ WATCardOffice::main() {
             isDestructed = true;
             break;
         }
-        or _Accept( create ) {
-            break;
+        or _When( !jobs.empty() ) _Accept( requestWork ) {
+            // only accept requestWork when there are jobs
+            jobs.pop();  // for greater concurrency
+            prt.print( Printer::WATCardOffice, 'W' );
         }
-        or _Accept( transfer ) {
-            break;
+        or _Accept( create, transfer ) {
+            // always accepts new jobs
+            jobs.push( newJob );  // for greater concurrency
         }
-        or _Accept( requestWork ) {
-            break;
-        }
-    }
+    }  // for
 
-    // signal all couriers and wait to delete them
-    while ( !cond_jobs.empty() ) {
-        cond_jobs.signal();
+    for ( auto i = 0U; i < numCouriers; ++i ) {
+        _Accept( requestWork ) {}
     }
     for ( auto i = 0U; i < numCouriers; ++i ) {
         delete couriers[i];
@@ -96,6 +91,38 @@ WATCardOffice::Courier::main() {
     prt.print( Printer::Courier, 'S' );
 
     for ( ;; ) {
-    }
+        // 1. requestWork from WATCardOffice
+        Job* job = office.requestWork();
+        if ( !job ) {
+            // no job returned, terminates
+            break;
+        }
 
-}  // WATCardOffice::Courier::create()
+        if ( !job->watcard ) {
+            // create WATCard if no card provided
+            job->watcard = new WATCard();
+        }
+        prt.print( Printer::Courier, id, 't', job->id, job->amount );
+
+        // 2. Withdraw amount from the bank
+        bank.withdraw( job->id, job->amount );
+        // 3. Deposit amount to the WATCard
+        job->watcard->deposit( job->amount );
+
+        // 4. Lose card or complete transfer
+        if ( mprng( 6 ) == 0 ) {  // 1 in 6 chance courier loses the card
+            // Lost the card
+            prt.print( Printer::Courier, id, 'L' );
+            delete job->watcard;
+            job->result.exception( new Lost() );
+        } else {
+            prt.print( Printer::Courier, id, 'T', job->id, job->amount );
+            job->result.delivery( job->watcard );
+        }
+
+        // 5. delete completed job
+        delete job;
+    }  // for
+
+    prt.print( Printer::Courier, id, 'F' );
+}  // WATCardOffice::Courier::main()

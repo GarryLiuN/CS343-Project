@@ -17,17 +17,13 @@ _Task WATCardOffice {
     unsigned int numCouriers;
     // classes and structures
     struct Job {  // marshalled arguments and return future
-        Bank&             bank;  // reference to the bank
         unsigned int      id;  // student id
         unsigned int      amount;  // amount of fund
         WATCard*          watcard;  // optional WATCard to transfer fund
         WATCard::FWATCard result;  // return future
 
-        Job( Bank&        bank,
-             unsigned int id,
-             unsigned int amount,
-             WATCard*     watcard = nullptr )
-            : bank( bank ), id( id ), amount( amount ), watcard( watcard ) {}
+        Job( unsigned int id, unsigned int amount, WATCard* watcard = nullptr )
+            : id( id ), amount( amount ), watcard( watcard ) {}
     };
 
     _Task Courier {
@@ -49,7 +45,6 @@ _Task WATCardOffice {
     // private fields
     Job*             newJob = nullptr;
     std::queue<Job*> jobs;
-    uCondition       cond_jobs;
     bool             isDestructed = false;
     // Task main
     void main();
