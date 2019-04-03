@@ -108,7 +108,7 @@ WATCardOffice::Courier::main() {
         job->watcard->deposit( job->amount );
 
         // 4. Lose card or complete transfer
-        if ( mprng( 6 ) == 0 ) {  // 1 in 6 chance courier loses the card
+        if ( mprng( 5 ) == 0 ) {  // 1 in 6 chance courier loses the card
             // Lost the card
             prt.print( Printer::Courier, id, 'L' );
             delete job->watcard;
