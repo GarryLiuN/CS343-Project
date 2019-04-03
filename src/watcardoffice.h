@@ -32,6 +32,7 @@ _Task WATCardOffice {
 
     _Task Courier {
        private:
+        Bank&          bank;
         WATCardOffice& office;
         Printer&       prt;
         unsigned int   id;
@@ -39,14 +40,17 @@ _Task WATCardOffice {
         void main();
 
        public:
-        Courier( WATCardOffice & office, Printer & prt, unsigned int id );
+        Courier( Bank & bank,
+                 WATCardOffice & office,
+                 Printer & prt,
+                 unsigned int id );
     };  // communicates with bank
 
     // private fields
-    Job*                 newJob = nullptr;
-    std::queue<Job*>     jobs;
-    std::vector<Courier> couriers;
-    uCondition           cond_jobs;
+    Job*             newJob = nullptr;
+    std::queue<Job*> jobs;
+    uCondition       cond_jobs;
+    bool             isDestructed = false;
     // Task main
     void main();
 

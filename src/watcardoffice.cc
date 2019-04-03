@@ -31,8 +31,16 @@ WATCardOffice::transfer( unsigned int sid,
 
 WATCardOffice::Job*
 WATCardOffice::requestWork() {
+    if ( isDestructed ) {  // system shutdown
+        return nullptr;
+    }
+
     if ( jobs.empty() ) {
         cond_jobs.wait();  // when there's no job, block here
+        // could be waken up due to system shutdown
+        if ( isDestructed ) {
+            return nullptr;
+        }
     }
     WATCardOffice::Job* job = jobs.front();
     jobs.pop();
@@ -45,11 +53,12 @@ WATCardOffice::main() {
 
     Courier* couriers[numCouriers];
     for ( auto i = 0U; i < numCouriers; ++i ) {
-        couriers[i] = new Courier( *this, prt, i );
+        couriers[i] = new Courier( bank, *this, prt, i );
     }
 
     for ( ;; ) {
         _Accept( ~WATCardOffice ) {
+            isDestructed = true;
             break;
         }
         or _Accept( create ) {
@@ -63,20 +72,30 @@ WATCardOffice::main() {
         }
     }
 
+    // signal all couriers and wait to delete them
+    while ( !cond_jobs.empty() ) {
+        cond_jobs.signal();
+    }
     for ( auto i = 0U; i < numCouriers; ++i ) {
         delete couriers[i];
     }
+
+    prt.print( Printer::Kind::WATCardOffice, 'F' );
 }  // WATCardOffice::main()
 
 // ***********************Courier***********************
 
-WATCardOffice::Courier::Courier( WATCardOffice& office,
+WATCardOffice::Courier::Courier( Bank&          bank,
+                                 WATCardOffice& office,
                                  Printer&       prt,
                                  unsigned int   id )
-    : office( office ), prt( prt ), id( id ) {}
+    : bank( bank ), office( office ), prt( prt ), id( id ) {}
 
 void
 WATCardOffice::Courier::main() {
     prt.print( Printer::Courier, 'S' );
+
+    for ( ;; ) {
+    }
 
 }  // WATCardOffice::Courier::create()
