@@ -9,9 +9,8 @@ extern const unsigned int NUMOFFLAVORS;
 _Task BottlingPlant {
    private:
     // references
-    static const unsigned int NUMOFFLAVORS = 4;
-    Printer&                  prt;
-    NameServer&               nameServer;
+    Printer&    prt;
+    NameServer& nameServer;
     // fields
     unsigned int numVendingMachines;
     unsigned int maxShippedPerFlavour;
