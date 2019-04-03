@@ -183,7 +183,7 @@ Printer::flush() {
             print_info( courier );
         }
     }
-    cout << '\n';
+    cout << endl;
 }
 
 void
