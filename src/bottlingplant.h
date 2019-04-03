@@ -4,7 +4,7 @@
 #include "nameserver.h"
 #include "printer.h"
 
-extern const unsigned int NUMOFFLAVORS;
+#define NUMOFFLAVORS 4
 
 _Task BottlingPlant {
    private:
