@@ -1,5 +1,6 @@
 #include "groupoff.h"
 
+#include "printer.h"
 #include "watcard.h"
 
 Groupoff::Groupoff( Printer&     prt,
@@ -17,4 +18,9 @@ Groupoff::giftCard() {
 }
 
 void
-Groupoff::main() {}
+Groupoff::main() {
+    prt.print( Printer::Groupoff, 'S' );
+
+    for ( ;; ) {
+    }
+}
