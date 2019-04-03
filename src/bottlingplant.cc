@@ -59,7 +59,6 @@ BottlingPlant::main() {
                    totalProduction );  // print soda generation message
 
         _Accept( ~BottlingPlant ) {
-
             isDestructed = true;  // update shut down flag and break loop
 
             break;

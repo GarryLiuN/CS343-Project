@@ -15,7 +15,8 @@ _Task Truck {
     unsigned int numVendingMachines;
     unsigned int maxStockPerFlavour;
     unsigned int cargo[NUMOFFLAVORS] = {0};
-    void         main();
+
+    void main();
 
    public:
     Truck( Printer & prt,
