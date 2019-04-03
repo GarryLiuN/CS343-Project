@@ -28,9 +28,6 @@ void
 Groupoff::main() {
     prt.print( Printer::Groupoff, 'S' );
 
-    for ( auto& watcard : watcards ) {
-        watcard = new WATCard();
-    }
     // 1. Wait for all student to call giftcard()
     for ( auto i = 0U; i < numStudents; ++i ) {
         _Accept( giftCard ){};
@@ -45,20 +42,15 @@ Groupoff::main() {
             // 2.1. yield before activate giftcard
             yield( groupoffDelay );
             // 2.2. get the WATCard and deposit sodaCost
-            WATCard* watcard = watcards.at( i );
-            watcard->deposit( sodaCost );
+            WATCard& watcard = watcards.at( i );
+            watcard.deposit( sodaCost );
             // 2.3. assign WATCard to a random giftcard, then remove the card
             auto index = mprng( numStudents - i - 1 );
-            giftcards.at( index ).delivery( watcard );
+            giftcards.at( index ).delivery( &watcard );
             giftcards.erase( giftcards.begin() + index );
 
             prt.print( Printer::Groupoff, 'D', sodaCost );
         }
-    }
-
-    // 3. Delete WATCards on heap
-    for ( auto watcard : watcards ) {
-        delete watcard;
     }
 
     prt.print( Printer::Groupoff, 'F' );

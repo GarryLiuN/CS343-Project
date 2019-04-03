@@ -16,7 +16,7 @@ _Task Groupoff {
     const unsigned int groupoffDelay;
     // fields
     std::vector<WATCard::FWATCard> giftcards;
-    std::vector<WATCard*>          watcards;
+    std::vector<WATCard>           watcards;
 
     void main();
 
