@@ -1,8 +1,11 @@
 #include "vendingmachine.h"
 
+#include "MPRNG.h"
 #include "nameserver.h"
 #include "printer.h"
 #include "watcard.h"
+
+extern MPRNG mprng;
 
 VendingMachine::VendingMachine( Printer&     prt,
                                 NameServer&  nameServer,
@@ -11,7 +14,19 @@ VendingMachine::VendingMachine( Printer&     prt,
     : prt( prt ), nameServer( nameServer ), id( id ), sodaCost( sodaCost ) {}
 
 void
-VendingMachine::buy( Flavours flavour, WATCard& card ) {}
+VendingMachine::buy( Flavours flavour, WATCard& card ) {
+    // Stage 1. Check fund and Soda
+    unsigned int balance = card.getBalance();
+    if ( balance < sodaCost ) {
+        _Throw Funds();
+    }
+
+    if ( stock[flavour] < 1 ) {
+        _Throw Stock();
+    }
+
+    // check free
+}
 
 unsigned int*
 VendingMachine::inventory() {}

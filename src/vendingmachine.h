@@ -1,9 +1,12 @@
 #ifndef __VENDINGMACHINE_H__
 #define __VENDINGMACHINE_H__
 
-#include "nameserver.h"
 #include "printer.h"
 #include "watcard.h"
+
+#define NUMOFFLAVORS 4
+
+_Task NameServer;
 
 _Task VendingMachine {
    private:
@@ -13,6 +16,8 @@ _Task VendingMachine {
     // attributes
     unsigned int id;
     unsigned int sodaCost;
+    unsigned int stock[NUMOFFLAVORS] = {0};
+    unsigned int flagType = 0;  // default: 0, Funds: 1, Stock: 2, Free: 3
 
     void main();
 
