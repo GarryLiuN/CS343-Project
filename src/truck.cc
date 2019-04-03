@@ -4,6 +4,7 @@
 #include "bottlingplant.h"
 #include "nameserver.h"
 #include "printer.h"
+#include "vendingmachine.h"
 extern MPRNG mprng;
 
 // -----------------------Public Methods-----------------------
@@ -57,7 +58,7 @@ Truck::main() {
             // obtain the id of the target machine
             unsigned int machineId = currentMachine->getId();
             // print begin delivery message
-            prt.print( Printer::Truck, 'd', id, totalCargo );
+            prt.print( Printer::Truck, 'd', machineId, totalCargo );
 
             // get target machine inventory
             unsigned int* inventory = currentMachine->inventory();
@@ -81,11 +82,11 @@ Truck::main() {
             }
             // print not replenished soda if necessary
             if ( notReplenished > 0 ) {
-                prt.print( Printer::Truck, 'U', id, notReplenished );
+                prt.print( Printer::Truck, 'U', machineId, notReplenished );
             }
             currentMachine->restocked();
 
-            prt.print( Printer::Truck, 'U', id, totalCargo );
+            prt.print( Printer::Truck, 'D', machineId, totalCargo );
         }
     }
     // print finish message after plant shutdown

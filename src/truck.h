@@ -5,8 +5,6 @@
 #include "nameserver.h"
 #include "printer.h"
 
-extern const unsigned int NUMOFFLAVORS;
-
 _Task Truck {
    private:
     // references
@@ -16,7 +14,7 @@ _Task Truck {
     // attributes
     unsigned int numVendingMachines;
     unsigned int maxStockPerFlavour;
-    unsigned int cargo[NUMOFFLAVORS];
+    unsigned int cargo[NUMOFFLAVORS] = {0};
     void         main();
 
    public:
