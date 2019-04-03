@@ -2,7 +2,6 @@
 #define __WATCARDOFFICE_H__
 
 #include <queue>
-#include <vector>
 
 #include "bank.h"
 #include "printer.h"

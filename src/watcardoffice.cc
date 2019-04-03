@@ -1,5 +1,3 @@
-#include <iostream>
-using namespace std;
 #include "watcardoffice.h"
 
 #include "bank.h"
