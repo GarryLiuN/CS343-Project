@@ -47,7 +47,8 @@ main( int argc, char* argv[] ) {
         cerr << "Usage: " << argv[0] << " [ config-file [ Seed ] ]" << endl;
         exit( EXIT_FAILURE );
     }  // try{} catch{}
-
+    cout << "seed: " << seed << " (for testing, remove before complete)"
+         << endl;
     mprng.set_seed( seed );
 
     ConfigParms configParms;
