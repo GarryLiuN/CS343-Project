@@ -107,7 +107,16 @@ Printer::print( Kind         kind,
                 unsigned int lid,
                 char         state,
                 int          value1,
-                int          value2 ) {}
+                int          value2 ) {
+    Printer::Info* infoptr = get_info( kind, lid );
+    if ( infoptr->dirty ) {
+        flush();
+    }
+    infoptr->state = state;
+    infoptr->val1  = value1;
+    infoptr->val2  = value2;
+    infoptr->dirty = true;
+}
 
 // -----------------------Private Methods-----------------------
 void
