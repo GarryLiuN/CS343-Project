@@ -60,11 +60,16 @@ BottlingPlant::main() {
 
         _Accept( ~BottlingPlant ) {
             isDestructed = true;  // update shut down flag and break loop
+
             break;
         }
         or _Accept( getShipment ) {
             prt.print( Printer::BottlingPlant, 'P' );  // print pickup message
         }
+    }
+    try {
+        _Accept( getShipment ) {}
+    } catch ( uMutexFailure::RendezvousFailure ) {
     }
 
     prt.print( Printer::BottlingPlant,

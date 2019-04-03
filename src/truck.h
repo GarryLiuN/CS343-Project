@@ -14,6 +14,7 @@ _Task Truck {
     // attributes
     unsigned int numVendingMachines;
     unsigned int maxStockPerFlavour;
+    unsigned int cargo[NUMOFFLAVORS] = {0};
 
     void main();
 
