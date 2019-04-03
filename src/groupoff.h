@@ -1,6 +1,8 @@
 #ifndef __GROUPOFF_H__
 #define __GROUPOFF_H__
 
+#include "vector"
+
 #include "printer.h"
 #include "watcard.h"
 
@@ -8,10 +10,13 @@ _Task Groupoff {
    private:
     // references
     Printer& prt;
+    // constant fields
+    const unsigned int numStudents;
+    const unsigned int sodaCost;
+    const unsigned int groupoffDelay;
     // fields
-    unsigned int numStudents;
-    unsigned int sodaCost;
-    unsigned int groupoffDelay;
+    std::vector<WATCard::FWATCard> giftcards;
+    std::vector<WATCard*>          watcards;
 
     void main();
 
