@@ -14,10 +14,21 @@ void
 NameServer::VMregister( VendingMachine* vendingmachine ) {}
 
 VendingMachine*
-NameServer::getMachine( unsigned int id ) {}
+NameServer::getMachine( unsigned int id ) {
+    return nullptr;
+}
 
 VendingMachine**
-NameServer::getMachineList() {}
+NameServer::getMachineList() {
+    return nullptr;
+}
 
 void
-NameServer::main() {}
+NameServer::main() {
+    for ( ;; ) {
+        _Accept( ~NameServer ) {
+            break;
+        }
+        or _Accept( getMachineList ) {}
+    }
+}
