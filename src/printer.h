@@ -3,8 +3,14 @@
 
 #include <vector>
 
+/**
+ * @brief Prnter class handles output of the Soda simulator
+ */
 _Monitor Printer {
    private:
+    /**
+     * @brief Internal data structure for each component
+     */
     struct Info {
         bool dirty = false;
         char state;
@@ -12,7 +18,8 @@ _Monitor Printer {
         int  val2 = -1;
     };
 
-    unsigned int numStudents;
+    unsigned int
+                 numStudents;  // doc PRIVATE fields only not trivial or necessary
     unsigned int numVendingMachines;
     unsigned int numCouriers;
 
@@ -28,10 +35,17 @@ _Monitor Printer {
     std::vector<Info> couriers;
 
     /**
-     * @brief Flush stored dirty Info buffer to stdout. and set all
-     *        Info.dirty = false
+     * @brief Flush stored dirty Info buffer to stdout. Then set all
+     *        Info.dirty = false.
      */
     void flush();
+
+    /**
+     * @brief Called by flush(). Will output info to stdout.
+     *        Then set info.val1/val2 = -1 and info.dirty = false.
+     *
+     * @info : Reference to the info to be output.
+     */
     void print_info( Info & info );
 
    public:
