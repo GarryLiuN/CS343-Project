@@ -62,8 +62,8 @@ main( int argc, char* argv[] ) {
     // 1.2. initialize Bank
     Bank bank( configParms.numStudents );
     // 1.3. initialize Parent
-    // Parent parent(
-    //     printer, bank, configParms.numStudents, configParms.parentalDelay );
+    Parent parent(
+        printer, bank, configParms.numStudents, configParms.parentalDelay );
     // 1.4. initialize WatCardOffice
     WATCardOffice watcardoffice( printer, bank, configParms.numCouriers );
     // 1.5. initialize Groupoff
