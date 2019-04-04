@@ -2,6 +2,7 @@
 #define __NAMESERVER_H__
 
 #include <vector>
+
 #include "printer.h"
 #include "vendingmachine.h"
 
@@ -15,6 +16,8 @@ _Task NameServer {
     std::vector<int>             studentIndex;
     std::vector<VendingMachine*> machineList;
     unsigned int                 lastMachineIndex = -1;
+
+    VendingMachine* newMachine;
 
     void main();
 

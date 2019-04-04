@@ -1,3 +1,6 @@
+#include <iostream>
+using namespace std;
+
 #include "nameserver.h"
 
 #include "printer.h"
@@ -19,8 +22,7 @@ NameServer::NameServer( Printer&     prt,
 
 void
 NameServer::VMregister( VendingMachine* vendingmachine ) {
-    machineList.push_back( vendingmachine );
-    prt.print( Printer::NameServer, 'R', vendingmachine->getId() );
+    newMachine = vendingmachine;
 }
 
 VendingMachine*
@@ -46,8 +48,12 @@ NameServer::main() {
     prt.print( Printer::NameServer, 'S' );
     // Stage 1. wait for all vending machine register
     for ( auto i = 0U; i < numVendingMachines; i++ ) {
-        _Accept( VMregister ){};
+        _Accept( VMregister ) {
+            machineList.push_back( newMachine );
+            prt.print( Printer::NameServer, 'R', newMachine->getId() );
+        };
     }
+
     // Stage 2. receive student and truck call
     for ( ;; ) {
         _Accept( ~NameServer ) {
@@ -55,8 +61,10 @@ NameServer::main() {
         }
         or _Accept( getMachine ){
 
-           } or _Accept( getMachineList ) {}
+        } or _Accept( getMachineList ) {}
     }
+
     // Stage 3. exit
+    prt.print( Printer::NameServer, 'F' );
     prt.print( Printer::NameServer, 'F' );
 }
