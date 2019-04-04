@@ -37,7 +37,7 @@ VendingMachine::buy( Flavours flavour, WATCard& card ) {
     // Stage 2. debit on card
     stock[flavour] -= 1;
     card.withdraw( sodaCost );
-    prt.print( Printer::Vending, 'B', flavour, stock[flavour] );
+    prt.print( Printer::Vending, id, 'B', flavour, stock[flavour] );
 }
 
 unsigned int*
@@ -63,7 +63,7 @@ VendingMachine::getId() const {
 
 void
 VendingMachine::main() {
-    prt.print( Printer::Vending, 'S', sodaCost );
+    prt.print( Printer::Vending, id, 'S', sodaCost );
     nameServer.VMregister( this );
     for ( ;; ) {
         _Accept( ~VendingMachine ) {
@@ -82,5 +82,5 @@ VendingMachine::main() {
 
         }
     }
-    prt.print( Printer::Vending, 'F' );
+    prt.print( Printer::Vending, id, 'F' );
 }
