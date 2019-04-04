@@ -19,4 +19,6 @@ Student::Student( Printer&       prt,
       maxPurchases( maxPurchases ) {}
 
 void
-Student::main() {}
+Student::main() {
+    groupoff.giftCard();
+}
