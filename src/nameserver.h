@@ -1,6 +1,8 @@
 #ifndef __NAMESERVER_H__
 #define __NAMESERVER_H__
 
+#include <vector>
+
 #include "printer.h"
 #include "vendingmachine.h"
 
@@ -9,8 +11,13 @@ _Task NameServer {
     // reference
     Printer& prt;
     // attributes
-    unsigned int numVendingMachines;
-    unsigned int numStudents;
+    unsigned int                 numVendingMachines;
+    unsigned int                 numStudents;
+    std::vector<int>             studentIndex;
+    std::vector<VendingMachine*> machineList;
+    unsigned int                 lastMachineIndex = -1;
+
+    VendingMachine* newMachine;
 
     void main();
 
