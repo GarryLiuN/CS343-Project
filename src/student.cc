@@ -67,7 +67,7 @@ Student::main() {
                                    watcard()->getBalance() );
                         break;
                     } catch ( VendingMachine::Funds& ) {
-                        cardOffice.transfer(
+                        watcard = cardOffice.transfer(
                             id,
                             vendingMachine->cost() + WATCARD_BALANCE,
                             watcard() );
