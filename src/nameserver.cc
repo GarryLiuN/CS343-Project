@@ -36,6 +36,7 @@ NameServer::getMachine( unsigned int id ) {
             = ( studentIndex.at( id ) + 1 ) % numVendingMachines;
     }
     prt.print( Printer::NameServer, 'N', id, studentIndex.at( id ) );
+    return machineList[studentIndex.at( id )];
 }
 
 VendingMachine**
