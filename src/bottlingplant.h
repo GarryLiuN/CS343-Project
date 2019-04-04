@@ -4,8 +4,6 @@
 #include "nameserver.h"
 #include "printer.h"
 
-#define NUMOFFLAVORS 4
-
 _Task BottlingPlant {
    private:
     // references

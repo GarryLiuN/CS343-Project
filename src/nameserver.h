@@ -2,8 +2,7 @@
 #define __NAMESERVER_H__
 
 #include "printer.h"
-
-_Task VendingMachine;
+#include "vendingmachine.h"
 
 _Task NameServer {
    private:
