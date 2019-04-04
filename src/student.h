@@ -4,7 +4,6 @@
 #include "groupoff.h"
 #include "nameserver.h"
 #include "printer.h"
-#include "vendingmachine.h"
 #include "watcardoffice.h"
 
 #define WATCARD_BALANCE 5
