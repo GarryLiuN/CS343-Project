@@ -26,12 +26,11 @@ Student::Student( Printer&       prt,
 
 void
 Student::main() {
-    prt.print( Printer::Student, id, 'S' );
-
     // 1. Setting up
     // 1.1. create favorate flavour
     VendingMachine::Flavours flavour
         = (VendingMachine::Flavours)mprng( NUMOFFLAVORS - 1 );
+    prt.print( Printer::Student, id, 'S', (int)flavour, maxPurchases );
     // 1.2 create WATCard
     WATCard::FWATCard watcard = cardOffice.create( id, WATCARD_BALANCE );
     // 1.3 create giftcard
