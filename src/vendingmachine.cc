@@ -16,28 +16,31 @@ VendingMachine::VendingMachine( Printer&     prt,
 
 void
 VendingMachine::buy( Flavours flavour, WATCard& card ) {
-    // Stage 1. Check fund and Soda
-    unsigned int balance = card.getBalance();
-    if ( balance < sodaCost ) {
-        flagType = 1;
-        _Throw Funds();
-    }
+    // copy parameter to local copy
+    tempFlavor = flavour;
+    tempCard   = &card;
 
-    if ( stock[flavour] < 1 ) {
-        flagType = 2;
-        _Throw Stock();
-    }
+    // move process logic back to main
+    switchBack.wait();
 
-    // Stage 1.2 check free
-    if ( mprng( 4 ) == 0 ) {
-        flagType = 3;
-        _Throw Free();
-    }
+    // throw exception is necessary
+    switch ( flag ) {
+        case ( Fundf ): {
+            flag = Default;
+            _Throw VendingMachine::Funds();
+        }
+        case ( Stockf ): {
+            flag = Default;
+            _Throw VendingMachine::Stock();
+        }
+        case ( Freef ): {
+            flag = Default;
+            _Throw VendingMachine::Free();
+        }
 
-    // Stage 2. debit on card
-    stock[flavour] -= 1;
-    card.withdraw( sodaCost );
-    prt.print( Printer::Vending, id, 'B', flavour, stock[flavour] );
+        default:
+            break;
+    }
 }
 
 unsigned int*
@@ -79,7 +82,32 @@ VendingMachine::main() {
         }
         // When not restocking accept buy call
         or _When(!restocking) _Accept(buy){
+            // Stage 1. Check fund and Soda
+            unsigned int balance = tempCard->getBalance();
+            if ( balance < sodaCost ) {
+                flag = Fundf;
+            }
 
+            if ( stock[tempFlavor] < 1 ) {
+                flag = Stockf;
+            }
+
+            // Stage 1.2 check free
+            if ( mprng( 4 ) == 0 ) {
+                flag = Freef;
+            }
+
+            // Stage 2. debit on card when not free
+            else {
+                flag = Default;
+                stock[tempFlavor] -= 1;
+                tempCard->withdraw( sodaCost );
+                prt.print(
+                    Printer::Vending, id, 'B', tempFlavor, stock[tempFlavor] );
+            }
+
+            // Stage 3. switch back to buy function
+            switchBack.signalBlock();
         }
     }
     prt.print( Printer::Vending, id, 'F' );

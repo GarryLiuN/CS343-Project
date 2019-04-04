@@ -17,9 +17,12 @@ _Task VendingMachine {
     unsigned int id;
     unsigned int sodaCost;
     unsigned int stock[NUMOFFLAVORS] = {0};
-    unsigned int flagType   = 0;  // default: 0, Funds: 1, Stock: 2, Free: 3
-    bool         restocking = false;
-    void         main();
+    enum { Default, Fundf, Stockf, Freef } flag;
+    bool       restocking = false;
+    uCondition switchBack;
+    WATCard*   tempCard;
+
+    void main();
 
    public:
     enum Flavours {
@@ -40,6 +43,9 @@ _Task VendingMachine {
     void                  restocked();
     _Nomutex unsigned int cost() const;
     _Nomutex unsigned int getId() const;
+
+   private:
+    Flavours tempFlavor;
 };
 
 #endif
