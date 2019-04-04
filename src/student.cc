@@ -50,6 +50,7 @@ Student::main() {
                         vendingMachine->buy( flavour, *watcard() );
                         purchased++;
                         prt.print( Printer::Student,
+                                   id,
                                    'B',
                                    flavour,
                                    watcard()->getBalance() );
@@ -61,6 +62,7 @@ Student::main() {
                         }
                         purchased++;
                         prt.print( Printer::Student,
+                                   id,
                                    'A',
                                    flavour,
                                    watcard()->getBalance() );
@@ -73,7 +75,7 @@ Student::main() {
                         break;
                         ;
                     } catch ( WATCardOffice::Lost& ) {
-                        prt.print( Printer::Student, 'L' );
+                        prt.print( Printer::Student, id, 'L' );
                         watcard = cardOffice.create( id, WATCARD_BALANCE );
                         continue;
                     }  // try (watcard)
@@ -85,6 +87,7 @@ Student::main() {
                         // 2.b.2 success purchased a soda
                         purchased++;
                         prt.print( Printer::Student,
+                                   id,
                                    'G',
                                    flavour,
                                    giftcard()->getBalance() );
@@ -97,6 +100,7 @@ Student::main() {
                         }
                         purchased++;
                         prt.print( Printer::Student,
+                                   id,
                                    'a',
                                    flavour,
                                    giftcard()->getBalance() );
@@ -105,7 +109,7 @@ Student::main() {
                 }  // _Select( giftcard )
             } catch ( VendingMachine::Stock& ) {
                 vendingMachine = nameServer.getMachine( id );
-                prt.print( Printer::Student, 'V', vendingMachine->getId() );
+                prt.print( Printer::Student, id, 'V', vendingMachine->getId() );
                 break;
             }  // try
         }  // for(;;)

@@ -86,26 +86,22 @@ VendingMachine::main() {
             unsigned int balance = tempCard->getBalance();
             if ( balance < sodaCost ) {
                 flag = Fundf;
+            } else if ( stock[tempFlavor] < 1 ) {
+                flag = Stockf;
             } else {
-                if ( stock[tempFlavor] < 1 ) {
-                    flag = Stockf;
+                // Stage 1.2 check free
+                if ( mprng( 4 ) == 0 ) {
+                    flag = Freef;
                 } else {
-                    // Stage 1.2 check free
-                    if ( mprng( 4 ) == 0 ) {
-                        flag = Freef;
-                    }
-
                     // Stage 2. debit on card when not free
-                    else {
-                        flag = Default;
-                        stock[tempFlavor] -= 1;
-                        tempCard->withdraw( sodaCost );
-                        prt.print( Printer::Vending,
-                                   id,
-                                   'B',
-                                   tempFlavor,
-                                   stock[tempFlavor] );
-                    }
+                    flag = Default;
+                    stock[tempFlavor] -= 1;
+                    tempCard->withdraw( sodaCost );
+                    prt.print( Printer::Vending,
+                               id,
+                               'B',
+                               tempFlavor,
+                               stock[tempFlavor] );
                 }
             }
 
