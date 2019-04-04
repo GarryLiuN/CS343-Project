@@ -111,6 +111,11 @@ Student::main() {
         }  // for(;;)
     }  // for
 
+    try {
+        delete watcard();
+    } catch ( ... ) {
+    }
+
     // 3. Finish
     prt.print( Printer::Student, id, 'F' );
 }
