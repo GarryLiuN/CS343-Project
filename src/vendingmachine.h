@@ -17,9 +17,9 @@ _Task VendingMachine {
     unsigned int id;
     unsigned int sodaCost;
     unsigned int stock[NUMOFFLAVORS] = {0};
-    unsigned int flagType = 0;  // default: 0, Funds: 1, Stock: 2, Free: 3
-
-    void main();
+    unsigned int flagType   = 0;  // default: 0, Funds: 1, Stock: 2, Free: 3
+    bool         restocking = false;
+    void         main();
 
    public:
     enum Flavours {
