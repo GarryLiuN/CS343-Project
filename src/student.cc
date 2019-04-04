@@ -22,7 +22,7 @@ Student::Student( Printer&       prt,
       cardOffice( cardOffice ),
       groupoff( groupoff ),
       id( id ),
-      maxPurchases( mprng( maxPurchases - 1 ) ) {}
+      maxPurchases( mprng( 1, maxPurchases ) ) {}
 
 void
 Student::main() {
