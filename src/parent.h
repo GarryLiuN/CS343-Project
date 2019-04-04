@@ -4,6 +4,9 @@
 #include "bank.h"
 #include "printer.h"
 
+/**
+ * @brief  The parent class handles random deposit to random student
+ */
 _Task Parent {
    private:
     // references
