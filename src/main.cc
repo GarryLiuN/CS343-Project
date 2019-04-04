@@ -55,33 +55,32 @@ main( int argc, char* argv[] ) {
     processConfigFile( config.c_str(), configParms );
 
     // ------------------Initialize and Start Instances------------------
-
-    // initialize Printer
+    // 1.1. initialize Printer
     Printer printer( configParms.numStudents,
                      configParms.numVendingMachines,
                      configParms.numCouriers );
-    // initialize Bank
+    // 1.2. initialize Bank
     Bank bank( configParms.numStudents );
-    // initialize Parent
+    // 1.3. initialize Parent
     Parent parent(
         printer, bank, configParms.numStudents, configParms.parentalDelay );
-    // initialize WatCardOffice
+    // 1.4. initialize WatCardOffice
     WATCardOffice watcardoffice( printer, bank, configParms.numCouriers );
-    // initialize Groupoff
+    // 1.5. initialize Groupoff
     Groupoff groupoff( printer,
                        configParms.numStudents,
                        configParms.sodaCost,
                        configParms.groupoffDelay );
-    // initialize NameServer
+    // 1.6. initialize NameServer
     NameServer nameserver(
         printer, configParms.numCouriers, configParms.numVendingMachines );
-    // initialize VendingMachines
+    // 1.7. initialize VendingMachines
     VendingMachine* vendingmachines[configParms.numVendingMachines];
     for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
         vendingmachines[i] = new VendingMachine(
             printer, nameserver, i, configParms.sodaCost );
     }
-    // initialize BottlingPlant
+    // 1.8. initialize BottlingPlant
     /** Since BottlingPlant needs to be deleted before VendingMachines,
      *  it needs to be allocated on heap for manual deletion     */
     BottlingPlant* bottlingPlant
@@ -91,7 +90,7 @@ main( int argc, char* argv[] ) {
                              configParms.maxShippedPerFlavour,
                              configParms.maxStockPerFlavour,
                              configParms.timeBetweenShipments );
-    // initialize Students
+    // 1.9. initialize Students
     Student* students[configParms.numStudents];
     for ( unsigned int i = 0; i < configParms.numStudents; ++i ) {
         students[i] = new Student( printer,
