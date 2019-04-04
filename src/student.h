@@ -6,6 +6,8 @@
 #include "printer.h"
 #include "watcardoffice.h"
 
+#define WATCARD_BALANCE 5
+
 _Task Student {
    private:
     // references
