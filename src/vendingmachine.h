@@ -1,9 +1,12 @@
 #ifndef __VENDINGMACHINE_H__
 #define __VENDINGMACHINE_H__
 
-#include "nameserver.h"
 #include "printer.h"
 #include "watcard.h"
+
+#define NUMOFFLAVORS 4
+
+_Task NameServer;
 
 _Task VendingMachine {
    private:
@@ -13,6 +16,11 @@ _Task VendingMachine {
     // attributes
     unsigned int id;
     unsigned int sodaCost;
+    unsigned int stock[NUMOFFLAVORS] = {0};
+    enum { Default, Fundf, Stockf, Freef } flag;
+    bool       restocking = false;
+    uCondition switchBack;
+    WATCard*   tempCard;
 
     void main();
 
@@ -35,6 +43,9 @@ _Task VendingMachine {
     void                  restocked();
     _Nomutex unsigned int cost() const;
     _Nomutex unsigned int getId() const;
+
+   private:
+    Flavours tempFlavor;
 };
 
 #endif
