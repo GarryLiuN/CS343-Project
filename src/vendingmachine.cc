@@ -25,15 +25,15 @@ VendingMachine::buy( Flavours flavour, WATCard& card ) {
 
     // throw exception is necessary
     switch ( flag ) {
-        case ( Fundf ): {
+        case ( FundFlag ): {
             flag = Default;
             _Throw VendingMachine::Funds();
         }
-        case ( Stockf ): {
+        case ( StockFlag ): {
             flag = Default;
             _Throw VendingMachine::Stock();
         }
-        case ( Freef ): {
+        case ( FreeFlag ): {
             flag = Default;
             _Throw VendingMachine::Free();
         }
@@ -85,24 +85,22 @@ VendingMachine::main() {
             // Stage 1. Check fund and Soda
             unsigned int balance = tempCard->getBalance();
             if ( balance < sodaCost ) {
-                flag = Fundf;
+                flag = FundFlag;
             } else if ( stock[tempFlavor] < 1 ) {
-                flag = Stockf;
+                flag = StockFlag;
             } else {
-                // Stage 1.2 check free
+                // reduce stock
+                stock[tempFlavor] -= 1;
+
                 if ( mprng( 4 ) == 0 ) {
-                    flag = Freef;
+                    flag = FreeFlag;
                 } else {
                     // Stage 2. debit on card when not free
                     flag = Default;
-                    stock[tempFlavor] -= 1;
                     tempCard->withdraw( sodaCost );
-                    prt.print( Printer::Vending,
-                               id,
-                               'B',
-                               tempFlavor,
-                               stock[tempFlavor] );
                 }
+                prt.print(
+                    Printer::Vending, id, 'B', tempFlavor, stock[tempFlavor] );
             }
 
             // Stage 3. switch back to buy function

@@ -17,7 +17,7 @@ _Task VendingMachine {
     unsigned int id;
     unsigned int sodaCost;
     unsigned int stock[NUMOFFLAVORS] = {0};
-    enum { Default, Fundf, Stockf, Freef } flag;
+    enum { Default, FundFlag, StockFlag, FreeFlag } flag;
     bool       restocking = false;
     uCondition switchBack;
     WATCard*   tempCard;
