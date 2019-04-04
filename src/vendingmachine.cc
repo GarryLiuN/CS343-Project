@@ -73,37 +73,40 @@ VendingMachine::main() {
             break;
         }
         // during restocking accept restock call
-        or _When(restocking) _Accept(restocked){
-
+        or _When( restocking ) _Accept( restocked ) {
+            prt.print( Printer::Vending, id, 'R' );
         }
         // When not restocking accept inventory call
-        or _When(!restocking) _Accept(inventory){
-
+        or _When( !restocking ) _Accept( inventory ) {
+            prt.print( Printer::Vending, id, 'r' );
         }
         // When not restocking accept buy call
-        or _When(!restocking) _Accept(buy){
+        or _When( !restocking ) _Accept( buy ) {
             // Stage 1. Check fund and Soda
             unsigned int balance = tempCard->getBalance();
             if ( balance < sodaCost ) {
                 flag = Fundf;
-            }
+            } else {
+                if ( stock[tempFlavor] < 1 ) {
+                    flag = Stockf;
+                } else {
+                    // Stage 1.2 check free
+                    if ( mprng( 4 ) == 0 ) {
+                        flag = Freef;
+                    }
 
-            if ( stock[tempFlavor] < 1 ) {
-                flag = Stockf;
-            }
-
-            // Stage 1.2 check free
-            if ( mprng( 4 ) == 0 ) {
-                flag = Freef;
-            }
-
-            // Stage 2. debit on card when not free
-            else {
-                flag = Default;
-                stock[tempFlavor] -= 1;
-                tempCard->withdraw( sodaCost );
-                prt.print(
-                    Printer::Vending, id, 'B', tempFlavor, stock[tempFlavor] );
+                    // Stage 2. debit on card when not free
+                    else {
+                        flag = Default;
+                        stock[tempFlavor] -= 1;
+                        tempCard->withdraw( sodaCost );
+                        prt.print( Printer::Vending,
+                                   id,
+                                   'B',
+                                   tempFlavor,
+                                   stock[tempFlavor] );
+                    }
+                }
             }
 
             // Stage 3. switch back to buy function
