@@ -47,7 +47,7 @@ Student::main() {
                 _Select( watcard ) {
                     try {
                         // 2.a.1 attempt to purchase with watcard
-                        // vendingMachine->buy( flavour, *watcard() );
+                        vendingMachine->buy( flavour, *watcard() );
                         purchased++;
                         prt.print( Printer::Student,
                                    'B',
@@ -81,7 +81,7 @@ Student::main() {
                 or _Select( giftcard ) {
                     try {
                         // 2.b.1 attempt to purchase with giftcard
-                        // vendingMachine->buy( flavour, *giftcard() );
+                        vendingMachine->buy( flavour, *giftcard() );
                         // 2.b.2 success purchased a soda
                         purchased++;
                         prt.print( Printer::Student,
