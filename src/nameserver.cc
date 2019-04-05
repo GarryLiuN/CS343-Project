@@ -1,6 +1,3 @@
-#include <iostream>
-using namespace std;
-
 #include "nameserver.h"
 
 #include "printer.h"

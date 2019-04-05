@@ -15,9 +15,9 @@ _Task NameServer {
     unsigned int numStudents;
     /** @brief studentIndex vector is used to store the last VM index each
      * student accessed, which will help to make sure that each student has a
-     * chance to
+     * chance to visit every machine
      */
-    visit every machine std::vector<int> studentIndex;
+    std::vector<int> studentIndex;
 
     std::vector<VendingMachine*> machineList;
 
