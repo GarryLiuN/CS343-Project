@@ -9,10 +9,12 @@ echo "Start Testing for SODA"
 
 for test in $TEST_DIR
 do
-    echo -e "\nTEST $COUNT"
-    echo "================================================"
+    echo
+    echo "================================================================================================"
+    echo -e "TEST $COUNT"
+    echo "================================================================================================"
     cat $test
-    echo -e "\n$EXEC $test $SEED "
+    echo -e "\n\$> $EXEC $test $SEED "
     $EXEC $test $SEED > temp
     (head; echo -e "\n................\n omitted\n................\n" ;tail)< temp
     COUNT=$((COUNT+1))
