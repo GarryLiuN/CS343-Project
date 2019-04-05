@@ -26,7 +26,8 @@ Truck::main() {
     prt.print( Printer::Truck, 'S' );
     // fetch all vending machines
     VendingMachine** vendingMachines = nameServer.getMachineList();
-    int currentMachineIndex = -1;  // choose the next vending machine to restock
+    // counter used to choose the next vending machine to restock
+    int currentMachineIndex = -1;
 
     for ( ;; ) {
         // coffee time
@@ -67,7 +68,7 @@ Truck::main() {
 
             unsigned int* inventory = currentMachine->inventory();
 
-            // counter for not replenished soda
+            // counter for not replenished soda reset for each vm
             unsigned int notReplenished = 0;
             // 2.2 start restock each flavor
             for ( auto i = 0U; i < NUMOFFLAVORS; i++ ) {

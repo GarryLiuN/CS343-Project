@@ -23,7 +23,6 @@ BottlingPlant::BottlingPlant( Printer&     prt,
       maxStockPerFlavour( maxStockPerFlavour ),
       timeBetweenShipments( timeBetweenShipments ) {}
 
-// getShipment will be called by truck and deliver current stock to the cargo
 void
 BottlingPlant::getShipment( unsigned int cargo[] ) {
     if ( isDestructed ) {
@@ -35,15 +34,13 @@ BottlingPlant::getShipment( unsigned int cargo[] ) {
     }
 }
 
+// -----------------------Private Methods-----------------------
 void
 BottlingPlant::main() {
-    prt.print( Printer::Kind::BottlingPlant,
-               'S' );  // print start message for bottling plant
-    Truck truck( prt,
-                 nameServer,
-                 *this,
-                 numVendingMachines,
-                 maxStockPerFlavour );  // create truck
+    prt.print( Printer::Kind::BottlingPlant, 'S' );
+
+    Truck truck(
+        prt, nameServer, *this, numVendingMachines, maxStockPerFlavour );
 
     // production run
     for ( ;; ) {
@@ -54,24 +51,27 @@ BottlingPlant::main() {
             currentStock[i] += mprng( maxShippedPerFlavour );
             totalProduction += currentStock[i];
         }
-        prt.print( Printer::BottlingPlant,
-                   'G',
-                   totalProduction );  // print soda generation message
 
+        prt.print( Printer::BottlingPlant, 'G', totalProduction );
+
+        // after soda production, either destructor will be call to terminate
+        // the o
         _Accept( ~BottlingPlant ) {
-            isDestructed = true;  // update shut down flag and break loop
+            // when destructor is called, update shut down flag and break loop
+            isDestructed = true;
 
             break;
         }
         or _Accept( getShipment ) {
-            prt.print( Printer::BottlingPlant, 'P' );  // print pickup message
+            prt.print( Printer::BottlingPlant, 'P' );
         }
     }
+    // one extra accept block used to throw Shutdown event to the truck and
+    // terminate the truck
     try {
         _Accept( getShipment ) {}
     } catch ( uMutexFailure::RendezvousFailure ) {
     }
 
-    prt.print( Printer::BottlingPlant,
-               'F' );  // print bottling plant finish message
+    prt.print( Printer::BottlingPlant, 'F' );
 }

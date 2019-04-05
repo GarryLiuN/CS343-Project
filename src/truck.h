@@ -5,6 +5,10 @@
 #include "nameserver.h"
 #include "printer.h"
 
+/**
+ *@brief class Truck will deliver soda from plant to each VM
+ *
+ */
 _Task Truck {
    private:
     // references
