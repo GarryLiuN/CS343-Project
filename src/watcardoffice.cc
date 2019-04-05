@@ -86,7 +86,7 @@ WATCardOffice::Courier::Courier( Bank&          bank,
 
 void
 WATCardOffice::Courier::main() {
-    prt.print( Printer::Courier, 'S' );
+    prt.print( Printer::Courier, id, 'S' );
 
     for ( ;; ) {
         // 1. requestWork from WATCardOffice
