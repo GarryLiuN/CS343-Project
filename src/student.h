@@ -22,6 +22,10 @@ _Task Student {
     void main();
 
    public:
+    /**
+     * @brief : Constructor for Student. Will assign corresponding fields with
+     * parameters. maxPurchases will be generated using mprng(1, maxPurchases)
+     */
     Student( Printer & prt,
              NameServer & nameServer,
              WATCardOffice & cardOffice,

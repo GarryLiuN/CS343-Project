@@ -38,6 +38,8 @@ Student::main() {
     // 1.4 obtain a vending machine
     VendingMachine* vendingMachine = nameServer.getMachine( id );
 
+    prt.print( Printer::Student, id, 'V', vendingMachine->getId() );
+
     // 2. Start purchasing sodas
     for ( unsigned int purchased = 0; purchased < maxPurchases; ) {
         yield( mprng( 1, 10 ) );
@@ -47,6 +49,7 @@ Student::main() {
                     try {
                         // 2.a.1 attempt to purchase with watcard
                         vendingMachine->buy( flavour, *watcard() );
+                        // Case: Normal (no exception)
                         purchased++;
                         prt.print( Printer::Student,
                                    id,
@@ -55,6 +58,7 @@ Student::main() {
                                    watcard()->getBalance() );
                         break;
                     } catch ( VendingMachine::Free& ) {
+                        // Case: Free Soda
                         // yield 4 times for free soda
                         for ( int i = 0; i < 4; ++i ) {
                             yield();
@@ -67,6 +71,7 @@ Student::main() {
                                    watcard()->getBalance() );
                         break;
                     } catch ( VendingMachine::Funds& ) {
+                        // Case: no sufficient fund
                         watcard = cardOffice.transfer(
                             id,
                             vendingMachine->cost() + WATCARD_BALANCE,
@@ -74,16 +79,17 @@ Student::main() {
                         break;
                         ;
                     } catch ( WATCardOffice::Lost& ) {
+                        // Case lost WATCard during transaction
                         prt.print( Printer::Student, id, 'L' );
                         watcard = cardOffice.create( id, WATCARD_BALANCE );
-                        continue;
+                        continue;  // dont yield for this case
                     }  // try (watcard)
                 }  // _Select( watcard )
                 or _Select( giftcard ) {
                     try {
                         // 2.b.1 attempt to purchase with giftcard
                         vendingMachine->buy( flavour, *giftcard() );
-                        // 2.b.2 success purchased a soda
+                        // Case: success purchased a soda
                         purchased++;
                         prt.print( Printer::Student,
                                    id,
@@ -107,6 +113,7 @@ Student::main() {
                     }  // try (giftcard)
                 }  // _Select( giftcard )
             } catch ( VendingMachine::Stock& ) {
+                // Case: Not enough stock. Common for both watcard and giftcard
                 vendingMachine = nameServer.getMachine( id );
                 prt.print( Printer::Student, id, 'V', vendingMachine->getId() );
                 break;
@@ -114,7 +121,7 @@ Student::main() {
         }  // for(;;)
     }  // for
 
-    try {
+    try {  // in case of watcard is lost
         delete watcard();
     } catch ( ... ) {
     }

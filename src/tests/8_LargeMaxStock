@@ -1,0 +1,14 @@
+# Test for vm has large max stock >> MaxShippedPerFlavour
+
+SodaCost                1
+NumStudents             4
+MaxPurchases            4
+NumVendingMachines      2
+MaxStockPerFlavour      20
+MaxShippedPerFlavour    1
+                         
+
+TimeBetweenShipments    5
+GroupoffDelay           1
+ParentalDelay           2
+NumCouriers             3

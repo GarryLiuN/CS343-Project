@@ -229,6 +229,15 @@ Printer::get_info( Kind kind, unsigned int id ) {
 }
 
 // -----------------------Free Helper Functions-----------------------
+/**
+ * @brief : Helper function for priinting tab(\t)'s. It will update
+ * tabs_printed.
+ *
+ * @tab_printed : a reference to the unsigned int which will has valueof
+ * tabs_needed eventually.
+ * @tab_printed : total number of tabs needs to be printed will be (tabs_needed
+ * - tabs_printed)
+ */
 void
 print_tabs( unsigned int& tabs_printed, unsigned int tabs_needed ) {
     for ( ; tabs_printed < tabs_needed; ++tabs_printed ) {

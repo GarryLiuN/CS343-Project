@@ -15,7 +15,7 @@ _Task WATCardOffice {
     // attributes
     unsigned int numCouriers;
     // classes and structures
-    struct Job {  // marshalled arguments and return future
+    struct Job {
         unsigned int      id;  // student id
         unsigned int      amount;  // amount of fund
         WATCard*          watcard;  // optional WATCard to transfer fund
@@ -25,6 +25,14 @@ _Task WATCardOffice {
             : id( id ), amount( amount ), watcard( watcard ) {}
     };
 
+    /**
+     * @brief : Subtask handles WATCardOffice communication with bank.
+     *
+     * @bank    : reference to the bank object.
+     * @office  : reference to the WATCardOffice who creates this courier
+     * @printer : reference to the Printer for output
+     * @id      : courier id; assigned by WATCardOffice
+     */
     _Task Courier {
        private:
         Bank&          bank;
@@ -51,9 +59,35 @@ _Task WATCardOffice {
    public:
     _Event Lost{};  // lost WATCard
     WATCardOffice( Printer & prt, Bank & bank, unsigned int numCouriers );
+    /**
+     * @brief : Create a new WATCard and return FWATCard watcard future pointer.
+     *          New card could be lost during transfering fund
+     *
+     * @return : a future pointer to the underlying WATCard
+     *
+     * @sid    : student id of the WATCard owner
+     * @amound : amount to be tranfer to watcard after creation
+     */
     WATCard::FWATCard create( unsigned int sid, unsigned int amount );
+    /**
+     * @brief : Transfer amount to the WATCard card and return a FWATCard
+     *          watcard future pointer points to it. New card could be lost
+     *          during transfering fund
+     *
+     * @return : a future pointer to the underlying WATCard
+     *
+     * @sid    : student id of the WATCard owner
+     * @amound : amount to be tranfer to watcard after creation
+     * @car    : WATCard to transfer fund to
+     */
     WATCard::FWATCard transfer(
         unsigned int sid, unsigned int amount, WATCard* card );
+    /**
+     * @brief : Called by Couriers. Will assign new job to the Courier
+     *
+     * @return : a pointer to the job. If WATCardOffice is being destructed, a
+     *           nullptr is returned
+     */
     Job* requestWork();
 };
 

@@ -1,0 +1,13 @@
+# Test for Expensive Soda( most students should end up buying a soda using giftcard)
+
+SodaCost                100
+NumStudents             5
+MaxPurchases            1
+NumVendingMachines      1
+MaxStockPerFlavour      1
+MaxShippedPerFlavour    1
+
+TimeBetweenShipments    3
+GroupoffDelay           1
+ParentalDelay           2
+NumCouriers             1
