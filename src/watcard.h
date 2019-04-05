@@ -11,9 +11,24 @@ class WATCard {
 
    public:
     typedef Future_ISM<WATCard*> FWATCard;  // future watcard pointer
+    /**
+     * @brief : WATCard constructor. balance will be initialized to 0
+     */
     WATCard();
-    void         deposit( unsigned int amount );
-    void         withdraw( unsigned int amount );
+    /**
+     * @brief : public interface for adding fund to watcard
+     * @amount : amount to be added to balance
+     */
+    void deposit( unsigned int amount );
+    /**
+     * @brief : public interface for withdrawing fund from watcard
+     * @amount : amount to be reduced from balance
+     */
+    void withdraw( unsigned int amount );
+    /**
+     * @brief : public interface for retrieve current balance
+     * @return : a copy of balance
+     */
     unsigned int getBalance();
 };
 
