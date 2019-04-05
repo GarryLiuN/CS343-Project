@@ -1,4 +1,9 @@
-Start Testing for SODA
+* Building Soda
+
+
+* Build Completed
+
+* Start Testing for Soda
 
 ================================================================================================
 TEST 0
@@ -18,7 +23,6 @@ ParentalDelay           2
 NumCouriers             1
 
 $> ./soda tests/1_parametersOfOnes 10013 
-seed: 10013 (for testing, remove before complete)
 Parent	Gropoff	WATOff	Names	Truck	Plant	Stud0	Mach0	Cour0
 *******	*******	*******	*******	*******	*******	*******	*******	*******
 S	S	S	S		S	S0,1	S1
@@ -28,6 +32,7 @@ D0,3	F	W			G2
 D0,3								T0,5
 D0,1				P2
 				d0,2
+D0,3				U0,2	P		r
 
 ................
  omitted
@@ -62,7 +67,6 @@ ParentalDelay           2
 NumCouriers             1
 
 $> ./soda tests/2_manyMahchinesOneStudent 10013 
-seed: 10013 (for testing, remove before complete)
 Parent	Gropoff	WATOff	Names	Truck	Plant	Stud0	Mach0	Mach1	Mach2	Mach3	Mach4	Cour0
 *******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******
 S	S	S	S		S	S0,7	S1	S1	S1	S1	S1
@@ -72,6 +76,7 @@ D0,3	F	W	R1		G3
 D0,2			R2									T0,5
 D0,3			R3
 D0,1			R4
+D0,2			N0,0			V0
 
 ................
  omitted
@@ -106,7 +111,6 @@ ParentalDelay           2
 NumCouriers             1
 
 $> ./soda tests/3_oneMachineManyStudents 10013 
-seed: 10013 (for testing, remove before complete)
 Parent	Gropoff	WATOff	Names	Truck	Plant	Stud0	Stud1	Stud2	Stud3	Stud4	Mach0	Cour0
 *******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******
 S	S	S	S		S	S1,1					S1
@@ -116,6 +120,7 @@ D2,3		C1,5	N1,0				V0
 D1,1		C2,5	N2,0					V0
 D4,2		C3,5	N3,0						V0
 D2,1	D1	C4,5	N4,0	P1						V0
+				d0,1
 
 ................
  omitted
@@ -150,7 +155,6 @@ ParentalDelay           2
 NumCouriers             1
 
 $> ./soda tests/4_manyMachinesTwoStudents 10013 
-seed: 10013 (for testing, remove before complete)
 Parent	Gropoff	WATOff	Names	Truck	Plant	Stud0	Stud1	Mach0	Mach1	Mach2	Mach3	Mach4	Cour0
 *******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******
 S	S	S	S		S	S2,2		S1	S1	S1	S1	S1
@@ -160,6 +164,7 @@ D1,3	D1	C1,5	R2
 	D1		R3
 D0,1	F		R4
 D1,3			N0,0			V0
+D0,1			N1,1				V1						L
 
 ................
  omitted
@@ -194,7 +199,6 @@ ParentalDelay           2
 NumCouriers             1
 
 $> ./soda tests/5_ExpensiveSoda 10013 
-seed: 10013 (for testing, remove before complete)
 Parent	Gropoff	WATOff	Names	Truck	Plant	Stud0	Stud1	Stud2	Stud3	Stud4	Mach0	Cour0
 *******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******
 S	S	S	S		S	S1,1					S100
@@ -204,6 +208,7 @@ D2,3		C1,5	N1,0				V0
 D1,1		C2,5	N2,0					V0
 D4,2		C3,5	N3,0						V0
 D2,1	D100	C4,5	N4,0	P1						V0
+				d0,1
 
 ................
  omitted
@@ -239,7 +244,6 @@ ParentalDelay           2
 NumCouriers             1
 
 $> ./soda tests/6_SlowDelivery 10013 
-seed: 10013 (for testing, remove before complete)
 Parent	Gropoff	WATOff	Names	Truck	Plant	Stud0	Stud1	Stud2	Stud3	Stud4	Stud5	Stud6	Stud7	Stud8	Stud9	Stud10	Stud11	Stud12	Stud13	Stud14	Mach0	Cour0
 *******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******
 S	S	S	S		S	S2,1															S1
@@ -249,6 +253,7 @@ D2,3		C1,5	N1,0		G0		V0
 D0,3		C2,5	N2,0					V0
 D3,3		C3,5	N3,0						V0
 D14,3		C4,5	N4,0							V0
+D1,1		C5,5	N5,0	P0							V0
 
 ................
  omitted
@@ -284,7 +289,6 @@ ParentalDelay           2
 NumCouriers             3
 
 $> ./soda tests/7_ManyCouriers 10013 
-seed: 10013 (for testing, remove before complete)
 Parent	Gropoff	WATOff	Names	Truck	Plant	Stud0	Mach0	Cour0	Cour1	Cour2
 *******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******
 S	S	S	S		S	S0,1	S1
@@ -294,6 +298,7 @@ D0,3	F	W			G2
 D0,3								T0,5
 D0,1				P2
 D0,3			N0,0	d0,2	P	V0
+D0,1				U0,2			r
 
 ................
  omitted
@@ -329,7 +334,6 @@ ParentalDelay           2
 NumCouriers             3
 
 $> ./soda tests/8_LargeMaxStock 10013 
-seed: 10013 (for testing, remove before complete)
 Parent	Gropoff	WATOff	Names	Truck	Plant	Stud0	Stud1	Stud2	Stud3	Mach0	Mach1	Cour0	Cour1	Cour2
 *******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******
 S	S	S	S		S	S1,1				S1	S1
@@ -339,6 +343,7 @@ D1,2		C1,5	N0,0		G1	V0
 D0,3		W	N1,1				V1						t1,5
 D2,3		C2,5	N2,0					V0				T0,5		t2,5
 D3,1		W	N0,1			V1
+D0,2	D1	C3,5	N3,1						V1			t3,5
 
 ................
  omitted
@@ -374,7 +379,6 @@ ParentalDelay           2
 NumCouriers             3
 
 $> ./soda tests/9_SmallMaxStock 10013 
-seed: 10013 (for testing, remove before complete)
 Parent	Gropoff	WATOff	Names	Truck	Plant	Stud0	Stud1	Stud2	Stud3	Mach0	Mach1	Cour0	Cour1	Cour2
 *******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******
 S	S	S	S		S	S1,1				S1	S1
@@ -384,6 +388,7 @@ D1,2		C1,5	N0,0		G260	V0
 D0,3		W	N1,1				V1						t1,5
 D2,3		C2,5	N2,0					V0				T0,5		t2,5
 D3,1		W	N0,1			V1
+D0,2	D1	C3,5	N3,1						V1			t3,5
 
 ................
  omitted

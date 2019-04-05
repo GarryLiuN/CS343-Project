@@ -5,7 +5,19 @@ SEED=10013
 TEST_DIR=tests/*
 COUNT=0
 
-echo "Start Testing for SODA"
+echo -e "* Building Soda\n"
+
+touch main.cc
+make &> /dev/null
+
+if [ $? -ne 0 ]; then
+    echo "Build Failed!!!"
+    exit $?
+fi
+
+echo -e "\n* Build Completed"
+
+echo -e "\n* Start Testing for Soda"
 
 for test in $TEST_DIR
 do
