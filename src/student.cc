@@ -38,6 +38,8 @@ Student::main() {
     // 1.4 obtain a vending machine
     VendingMachine* vendingMachine = nameServer.getMachine( id );
 
+    prt.print( Printer::Student, id, 'V', vendingMachine->getId() );
+
     // 2. Start purchasing sodas
     for ( unsigned int purchased = 0; purchased < maxPurchases; ) {
         yield( mprng( 1, 10 ) );
