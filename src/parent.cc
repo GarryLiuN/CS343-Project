@@ -7,6 +7,8 @@
 
 extern MPRNG mprng;
 
+// -----------------------Public Methods-----------------------
+
 Parent::Parent( Printer&     prt,
                 Bank&        bank,
                 unsigned int numStudents,
@@ -17,27 +19,30 @@ Parent::Parent( Printer&     prt,
       parentalDelay( parentalDelay ) {}
 
 Parent::~Parent() {
-    prt.print( Printer::Kind::Parent, 'F' );  // print terminate message
+    prt.print( Printer::Kind::Parent, 'F' );
 }
-void
 
+// -----------------------Private Methods-----------------------
+
+void
 Parent::main() {
-    prt.print( Printer::Kind::Parent, 'S' );  // print start message for parent
+    prt.print( Printer::Kind::Parent, 'S' );
+
+    // start feed loop
     for ( ;; ) {
         _Accept( ~Parent ) {  // check for call to terminate
             break;
         }
         _Else {
-            yield( parentalDelay );  // yields for parentalDelay times
-            unsigned int randomId
-                = mprng( 0, numStudents - 1 );  // generate random student id
-            unsigned int randomDeposit
-                = mprng( 1, 3 );  // generate random deposit amount
+            yield( parentalDelay );
+
+            unsigned int randomId = mprng( 0, numStudents - 1 );
+
+            unsigned int randomDeposit = mprng( 1, 3 );
+
             bank.deposit( randomId, randomDeposit );  // make bank deposit
-            prt.print( Printer::Kind::Parent,
-                       'D',
-                       randomId,
-                       randomDeposit );  // print deposit message
+
+            prt.print( Printer::Kind::Parent, 'D', randomId, randomDeposit );
         };
     }
 }
