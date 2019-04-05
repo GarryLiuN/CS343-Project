@@ -72,7 +72,7 @@ _Task WATCardOffice {
     /**
      * @brief : Transfer amount to the WATCard card and return a FWATCard
      *          watcard future pointer points to it. New card could be lost
-     * during transfering fund
+     *          during transfering fund
      *
      * @return : a future pointer to the underlying WATCard
      *
@@ -85,7 +85,7 @@ _Task WATCardOffice {
     /**
      * @brief : Called by Couriers. Will assign new job to the Courier
      *
-     * @return : a pointer to the job. If WATCardOffice is being detructed, a
+     * @return : a pointer to the job. If WATCardOffice is being destructed, a
      *           nullptr is returned
      */
     Job* requestWork();
