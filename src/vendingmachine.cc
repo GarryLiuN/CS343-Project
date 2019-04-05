@@ -23,7 +23,7 @@ VendingMachine::buy( Flavours flavour, WATCard& card ) {
     // move process logic back to main
     switchBack.wait();
 
-    // throw exception is necessary
+    // throw exception and reset flag to default when necessary
     switch ( flag ) {
         case ( FundFlag ): {
             flag = Default;
@@ -82,7 +82,7 @@ VendingMachine::main() {
         }
         // When not restocking accept buy call
         or _When( !restocking ) _Accept( buy ) {
-            // Stage 1. Check fund and Soda
+            // Stage 1. Check fund and Soda stock level
             unsigned int balance = tempCard->getBalance();
             if ( balance < sodaCost ) {
                 flag = FundFlag;
@@ -92,6 +92,7 @@ VendingMachine::main() {
                 // reduce stock
                 stock[tempFlavor] -= 1;
 
+                // check if this soda will be free
                 if ( mprng( 4 ) == 0 ) {
                     flag = FreeFlag;
                 } else {
