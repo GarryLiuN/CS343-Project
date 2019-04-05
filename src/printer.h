@@ -18,8 +18,7 @@ _Monitor Printer {
         int  val2 = -1;
     };
 
-    unsigned int
-                 numStudents;  // doc PRIVATE fields only not trivial or necessary
+    unsigned int numStudents;
     unsigned int numVendingMachines;
     unsigned int numCouriers;
 
@@ -73,6 +72,11 @@ _Monitor Printer {
      *        deletion.
      */
     ~Printer();
+    /**
+     * @brief : public interfaces for updating kind's corresponding
+     *          Info instance. If the updating Info is dirty, a flush()
+     *          will be invoked and stored Info will be output to stdout
+     */
     void print( Kind kind, char state );
     void print( Kind kind, char state, int value1 );
     void print( Kind kind, char state, int value1, int value2 );
@@ -83,6 +87,12 @@ _Monitor Printer {
 
    private:
     // additional helper method. since it depends on Kind
+    /**
+     * @brief : Get the pointer to the Info instance based on kind and
+     *          optional id
+     * @kind : Indicates which Info to retrieve
+     * @id   : Only used when kind is Student, VendingMachine or Courier
+     */
     Info* get_info( Kind kind, unsigned int id = 0 );
 };
 
