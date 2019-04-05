@@ -28,14 +28,20 @@ NameServer::VMregister( VendingMachine* vendingmachine ) {
 VendingMachine*
 NameServer::getMachine( unsigned int id ) {
     int prevStudentIndex = studentIndex.at( id );
-    if ( prevStudentIndex == -1 ) {  // first time assign
+
+    if ( prevStudentIndex == -1 ) {
+        // first time assign, increment the shared lastMachineIndex
         lastMachineIndex      = ( lastMachineIndex + 1 ) % numVendingMachines;
         studentIndex.at( id ) = lastMachineIndex;
-    } else {  // not first time assign
+
+    } else {
+        // not first time assign, increment based on previous access VM
+        // index
         studentIndex.at( id )
             = ( studentIndex.at( id ) + 1 ) % numVendingMachines;
     }
     prt.print( Printer::NameServer, 'N', id, studentIndex.at( id ) );
+
     return machineList[studentIndex.at( id )];
 }
 
@@ -43,6 +49,8 @@ VendingMachine**
 NameServer::getMachineList() {
     return &machineList[0];
 }
+
+// -----------------------Private Methods-----------------------
 
 void
 NameServer::main() {
@@ -66,6 +74,5 @@ NameServer::main() {
     }
 
     // Stage 3. exit
-    prt.print( Printer::NameServer, 'F' );
     prt.print( Printer::NameServer, 'F' );
 }
