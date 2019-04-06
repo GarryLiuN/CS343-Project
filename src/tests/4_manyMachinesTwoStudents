@@ -1,0 +1,13 @@
+# Test for multiple machine two students( mainly test on nameserver: assign order)
+
+SodaCost                1
+NumStudents             2
+MaxPurchases            5
+NumVendingMachines      5
+MaxStockPerFlavour      1
+MaxShippedPerFlavour    1
+
+TimeBetweenShipments    3
+GroupoffDelay           1
+ParentalDelay           2
+NumCouriers             1

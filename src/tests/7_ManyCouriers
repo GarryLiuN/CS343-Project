@@ -1,0 +1,14 @@
+# Test for one machine one student and multiple couriers
+
+SodaCost                1
+NumStudents             1
+MaxPurchases            2
+NumVendingMachines      1
+MaxStockPerFlavour      1
+MaxShippedPerFlavour    1
+                         
+
+TimeBetweenShipments    5
+GroupoffDelay           1
+ParentalDelay           2
+NumCouriers             3
