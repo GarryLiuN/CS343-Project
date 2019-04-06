@@ -24,8 +24,7 @@ $ ./soda ./soda.config 10 10
 Too many arguments.
 Usage: ./soda [ config-file [ Seed ] ]
 
-========================
-========================================================================
+================================================================================================
 VALID INPUT TEST 0
 ================================================================================================
 # Test for all parameters are one. (tested)
@@ -264,10 +263,10 @@ ParentalDelay           2
 NumCouriers             1
 
 $> ./soda tests/6_SlowDelivery 10013 
-Parent	Gropoff	WATOff	Names	Truck	Plant	Stud0	Stud1	Stud2	Stud3	Stud4	Stud5	Stud6	Stud7	Stud8	Stud9	Stud10	Stud11	Stud12	Stud13	Stud14	Mach0	Cour0
-*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******
+Parent	Gropoff	WATOff	Names	Truck	Plant	Stud0	Stud1	Stud2	Stud3	Stud4	Stud5	Stud6	/* omitted */
+*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	/* omitted */
 S	S	S	S		S	S2,1															S1
-D3,3		C0,5	R0	S			S0,1	S1,1	S1,2	S0,2	S0,2	S0,2	S2,2	S2,1	S2,1	S2,1	S2,2	S3,2	S3,2	S1,1		S
+D3,3		C0,5	R0	S			S0,1	S1,1	S1,2	S0,2	S0,2	S0,2	S2,2	S2,1	S2,1		/* omitted */
 D1,3		W	N0,0			V0																t0,5
 D2,3		C1,5	N1,0		G0		V0
 D0,3		C2,5	N2,0					V0
